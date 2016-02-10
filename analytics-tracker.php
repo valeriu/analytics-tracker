@@ -2,7 +2,7 @@
 /*
  * Plugin Name: Analytics Tracker
  * Plugin URI: https://stylishwp.com
- * Description: This plugin add Google Analytics tracking to your WordPress
+ * Description: Analytics Tracker makes it super easy to add tracking code on your blog
  * Text Domain: analytics-tracker
  * Domain Path: /languages
  * Version: 1.0.0
@@ -46,7 +46,7 @@ class AnalyticsTracker {
 		// Add Admin menu
 		add_action( 'admin_menu', array( $this, 'analyticstracker_admin_menu' ), 4 );
 
-		// Load setings
+		// Load settings
 		add_action( 'plugins_loaded', array( &$this, 'analyticstracker_settings' ), 1 );
 
 		// Setting Initialization
@@ -151,7 +151,7 @@ class AnalyticsTracker {
 		return array(
 			array(
 				'settings_type' => 'section',
-				'id' => 'analyticstracker_section_setings_general',
+				'id' => 'analyticstracker_section_settings_general',
 				'title' => '',
 				'callback' => 'analyticstracker_description_section_callback',
 				'page' => 'analyticstracker_page'
@@ -159,10 +159,10 @@ class AnalyticsTracker {
 			array (
 				'settings_type' => 'field',
 				'id' => 'analyticstracker_ga',
-				'title' => __( 'Google Analytics ID', 'analytics-tracker' ),
+				'title' => __( 'Google Analytics tracking ID', 'analytics-tracker' ),
 				'callback' => 'analyticstracker_settings_field_render',
 				'page' => 'analyticstracker_page',
-				'section' => 'analyticstracker_section_setings_general',
+				'section' => 'analyticstracker_section_settings_general',
 				'args' => 	array (
 								'id' => 'analyticstracker_ga',
 								'type' => 'text',
@@ -170,7 +170,7 @@ class AnalyticsTracker {
 								'name' => 'analyticstracker_ga',
 								'value' => 'analyticstracker_ga',
 								'label_for' => '',
-								'description' => __( 'Add Google Analytics tracking  code (UA-XXXXXXX-YY).', 'analytics-tracker' ),
+								'description' => __( 'Add Google Analytics tracking ID (UA-XXXXXXX-YY). Where can I find <a href="https://support.google.com/analytics/answer/1032385?rd=1" target="_blank">my tracking ID?</a>', 'analytics-tracker' ),
 							)
 						)
 		);
@@ -262,7 +262,7 @@ class AnalyticsTracker {
 
 
 	/**
-	 * Generate setings form
+	 * Generate settings form
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -270,7 +270,7 @@ class AnalyticsTracker {
 	public function analyticstracker_options_page() {
 		?>
 		<div class="wrap">
-			<h2><?php _e( 'Google Analytics Setings', 'analytics-tracker' ); ?></h2>
+			<h2><?php _e( 'Google Analytics Settings', 'analytics-tracker' ); ?></h2>
 			<form action='options.php' method='post'>
 				<?php
 					settings_fields( 'analyticstracker_page' );
