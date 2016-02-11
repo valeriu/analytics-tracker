@@ -6,7 +6,7 @@ Contributors: valeriutihai
 Author: Valeriu Tihai
 Author URI: http://valeriu.tihai.ca
 Text Domain: analytics-tracker
-Tags: Add code, Add Google Analytics plugin, Add Google plugin, Add tracking code, Analitics, Analyticator, Analytics, Analytics Tracker, Code, Free Google Analytics plugin, Free Google statistics plugin, Free WP Google plugins, GA code, GA code integration, GA Plugin, GA Script, Google, Google Analytics, Google Analytics for WordPress, Google Analytics in WordPress, Google Analytics plugin, Google Analytics stats, Google Statistics, Install Analytics, JavaScript, Marketing, Metrics, Page, Page Views, Pageviews, Real-time, Realtime, Statistics, Stats, StylishWP, Tracking, Tracking Code, UA Code, Universal Analytics, Universal Google Analytics, Visit duration, Visitors, Visits, Visits statistics, Web properties, Web Stats, Webproperties, WordPress analytics, WordPress Google Analytics, WordPress Google Analytics plugin, WordPress Google plugin, WP Google Analytics, WP Google Analytics Plugin, WP Google plugin, WP Google statistics plugin
+Tags: Google Analytics, Analytics Tracker, Tracking Code, UA Code, Universal Analytics, Visits statistics, Web Stats, WordPress Google Analytics
 Donate link: https://paypal.me/valeriu/5
 Requires at least: 4.2
 Tested up to: 4.4.2
