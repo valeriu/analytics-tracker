@@ -63,7 +63,7 @@ class AnalyticsTracker {
 	 */
 	public function analyticstracker_ga_script() {
 		$saved_options = get_option( 'analyticstracker_settings' );
-		if(preg_match("/UA-[0-9]{7,}-[0-9]{1,}/", $saved_options['analyticstracker_ga']) ) { ?>
+		if(preg_match("/UA-[0-9]{3,9}-[0-9]{1,4}/", $saved_options['analyticstracker_ga']) ) { ?>
 		<script>
 		  (function(i,s,o,g,r,a,m){i['analyticstracker_pageObject']=r;i[r]=i[r]||function(){
 		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -111,7 +111,7 @@ class AnalyticsTracker {
 	 */
 	public function analyticstracker_admin_menu() {
 		add_menu_page( __('Google Analytics', 'analytics-tracker'), __('Google Analytics', 'analytics-tracker'), 'manage_options', 'analyticstracker-menu', array( $this, 'analyticstracker_options_page'), 'dashicons-chart-line' );
-		add_submenu_page( 'analyticstracker-menu', __('Other Plugins', 'analytics-tracker'), __('Other Plugins', 'analytics-tracker'), 'manage_options', 'analyticstracker-other-plugins', array( $this, 'analyticstracker_other_plugins' ) );
+		add_submenu_page( 'analyticstracker-menu', __('Other Products', 'analytics-tracker'), __('Other Products', 'analytics-tracker'), 'manage_options', 'analyticstracker-other-plugins', array( $this, 'analyticstracker_other_plugins' ) );
 	}
 
 
@@ -124,14 +124,29 @@ class AnalyticsTracker {
 	public function  analyticstracker_other_plugins() { ?>
 		 <?php add_thickbox(); ?>
 		<div class="wrap">
-			<h2><?php _e( 'Other Plugins', 'analytics-tracker' ); ?></h2>
+			<h2><?php _e( 'My Recommendations', 'analytics-tracker' ); ?></h2>
 			<div class='card pressthis'>
+				<h2><?php _e( 'WordPress Plugins', 'analytics-tracker' ); ?></h2>
 				<ul>
 					<li>
 						<a href="<?php echo network_admin_url( 'plugin-install.php?tab=plugin-information&plugin=wplook-twitter-follow-button-new&TB_iframe=true&width=762&height=600'); ?>" class="thickbox"><?php _e('Twitter Follow Button', 'analytics-tracker'); ?></a> - <?php _e('Add the Twitter Follow Button to your blog to increase engagement and create a lasting connection with your audience.', 'analytics-tracker'); ?>
 					</li>
 					<li>
 						<a href="<?php echo network_admin_url( 'plugin-install.php?tab=plugin-information&plugin=auto-update&TB_iframe=true&width=762&height=600'); ?>" class="thickbox"><?php _e('Auto Update', 'analytics-tracker'); ?></a> - <?php _e('This plugin enable Auto Update for WordPress core, Themes and Plugins.', 'analytics-tracker'); ?>
+					</li>
+				</ul>
+			</div>
+			<div class='card pressthis'>
+				<h2><?php _e( 'WordPress Themes', 'analytics-tracker' ); ?></h2>
+				<ul>
+					<li>
+						<a href="<?php echo network_admin_url( 'theme-install.php?theme=blogolife'); ?>"><?php _e('BlogoLife', 'analytics-tracker'); ?></a> - <?php _e('BlogoLife is a simple and perfect WordPress theme for personal blogging that supports post formats, and several customization options.', 'analytics-tracker'); ?>
+					</li>
+					<li>
+						<a href="<?php echo network_admin_url( 'theme-install.php?theme=dailypost'); ?>"><?php _e('DailyPost', 'analytics-tracker'); ?></a> - <?php _e('DailyPost is intresting theme ideal for your everyday notes and thoughts, which supports post formats and several customisation options. The theme is a special one because of it\'s responsive design, thus you will get the pleasure to read the post with your mobile device.', 'analytics-tracker'); ?>
+					</li>
+					<li>
+						<a href="<?php echo esc_url( 'http://themeforest.net/item/campevent-conference-event-wordpress-theme/11439450?ref=stylishwp' ); ?>" target="_blank"><?php _e('CampEvent', 'analytics-tracker'); ?></a> - <?php _e('CampEvent is a WordPress theme that allow to easily configure event, exhibitions, conventions, trade shows, seminars, workshops, meetup by adding detailed information about speakers, sponsors, schedule and much more.', 'analytics-tracker'); ?>
 					</li>
 				</ul>
 			</div>
