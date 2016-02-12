@@ -5,7 +5,7 @@
  * Description: Analytics Tracker makes it super easy to add tracking code on your blog
  * Text Domain: analytics-tracker
  * Domain Path: /languages
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Valeriu Tihai
  * Author URI: http://valeriu.tihai.ca
  * Contributors: valeriutihai

@@ -10,7 +10,7 @@ Tags: Google Analytics, Analytics Tracker, Tracking Code, UA Code, Universal Ana
 Donate link: https://paypal.me/valeriu/5
 Requires at least: 4.2
 Tested up to: 4.4.2
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,5 +70,9 @@ You can translate Analytics Tracker on [translate.wordpress.org](https://transla
 1. Google Analytics Settings
 
 == Changelog ==
+= 1.0.1 =
+* Added my WordPress themes
+* Fixed Regex for UA Code
+
 = 1.0.0 =
 * First Release
