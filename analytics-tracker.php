@@ -70,7 +70,11 @@ class AnalyticsTracker {
 		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-		  ga('create', '<?php echo $saved_options['analyticstracker_ga']; ?>', 'auto');
+		  <?php $this->analyticstracker_ga_get(); ?>
+		  <?php $this->analyticstracker_ga_displayfeatures_get(); ?>
+		  <?php $this->analyticstracker_ga_forcessl_get(); ?>
+		  <?php $this->analyticstracker_ga_userid_get(); ?>
+		  <?php $this->analyticstracker_ga_anonymizeip_get(); ?>
 		  ga('send', 'pageview');
 
 		</script>
@@ -134,6 +138,9 @@ class AnalyticsTracker {
 					<li>
 						<a href="<?php echo network_admin_url( 'plugin-install.php?tab=plugin-information&plugin=auto-update&TB_iframe=true&width=762&height=600'); ?>" class="thickbox"><?php _e('Auto Update', 'analytics-tracker'); ?></a> - <?php _e('This plugin enable Auto Update for WordPress core, Themes and Plugins.', 'analytics-tracker'); ?>
 					</li>
+					<li>
+						<a href="https://wplook.com/product/plugins/comingsoon-maintenance-mode-wordpress-plugin/?ref=104&campaign=AnalyticsTracker" target="_blank"><?php _e('ComingSoon', 'analytics-tracker'); ?></a> - <?php _e('ComingSoon is a Premium Maintenance Mode Plugin designed specifically for Editors, Designers or Developers who want to let visitors know the blog is down for Maintenance or Under Construction.', 'analytics-tracker') ?>
+					</li>
 				</ul>
 			</div>
 			<div class='card pressthis'>
@@ -186,9 +193,149 @@ class AnalyticsTracker {
 								'value' => 'analyticstracker_ga',
 								'label_for' => '',
 								'description' => __( 'Add Google Analytics tracking ID (UA-XXXXXXX-YY). Where can I find <a href="https://support.google.com/analytics/answer/1032385?rd=1" target="_blank">my tracking ID?</a>', 'analytics-tracker' ),
-							)
-						)
+				)
+			),
+			array (
+				'settings_type' => 'field',
+				'id' => 'analyticstracker_forcessl',
+				'title' => __( 'Force SSL', 'analytics-tracker' ),
+				'callback' => 'analyticstracker_settings_field_render',
+				'page' => 'analyticstracker_page',
+				'section' => 'analyticstracker_section_settings_general',
+				'args' => 	array (
+									'id' => 'analyticstracker_forcessl',
+									'type' => 'checkbox',
+									'class' => '',
+									'name' => 'analyticstracker_forcessl',
+									'value' => 1,
+									'label_for' => '',
+									'description' => __( 'Setting forceSSL to true will force http pages to also send all beacons using https.', 'analytics-tracker' ),
+				)
+			),
+			array (
+				'settings_type' => 'field',
+				'id' => 'analyticstracker_userid',
+				'title' => __( 'User ID', 'analytics-tracker' ),
+				'callback' => 'analyticstracker_settings_field_render',
+				'page' => 'analyticstracker_page',
+				'section' => 'analyticstracker_section_settings_general',
+				'args' => 	array (
+									'id' => 'analyticstracker_userid',
+									'type' => 'checkbox',
+									'class' => '',
+									'name' => 'analyticstracker_userid',
+									'value' => 1,
+									'label_for' => '',
+									'description' => __( 'This is intended to be a known identifier for a user provided by the site owner/tracking library user.', 'analytics-tracker' ),
+				)
+			),
+			array (
+				'settings_type' => 'field',
+				'id' => 'analyticstracker_anonymizeip',
+				'title' => __( 'Anonymize IP', 'analytics-tracker' ),
+				'callback' => 'analyticstracker_settings_field_render',
+				'page' => 'analyticstracker_page',
+				'section' => 'analyticstracker_section_settings_general',
+				'args' => 	array (
+									'id' => 'analyticstracker_anonymizeip',
+									'type' => 'checkbox',
+									'class' => '',
+									'name' => 'analyticstracker_anonymizeip',
+									'value' => 1,
+									'label_for' => '',
+									'description' => __( 'The IP address of the sender will be anonymized', 'analytics-tracker' ),
+				)
+			),
+			array (
+				'settings_type' => 'field',
+				'id' => 'analyticstracker_displayfeatures',
+				'title' => __( 'Display Features', 'analytics-tracker' ),
+				'callback' => 'analyticstracker_settings_field_render',
+				'page' => 'analyticstracker_page',
+				'section' => 'analyticstracker_section_settings_general',
+				'args' => 	array (
+									'id' => 'analyticstracker_displayfeatures',
+									'type' => 'checkbox',
+									'class' => '',
+									'name' => 'analyticstracker_displayfeatures',
+									'value' => 1,
+									'label_for' => '',
+									'description' => __( 'The plugin works by sending an additional request to stats.g.doubleclick.net that is used to provide advertising features like remarketing and demographics and interest reporting in Google Analytics.', 'analytics-tracker' ),
+				)
+			),
 		);
+	}
+
+
+	/**
+	 * Get Goolge Analytics code
+	 *
+	 * @since 1.0.2
+	 * @access public
+	 */
+	public function analyticstracker_ga_get () {
+		$saved_options = get_option( 'analyticstracker_settings' );
+		if ( preg_match("/UA-[0-9]{3,9}-[0-9]{1,4}/", $saved_options['analyticstracker_ga']) ) {
+			echo "ga('create', '".$saved_options['analyticstracker_ga']."', 'auto');\r\n";
+		}
+	}
+
+
+	/**
+	 * Get Force SSL
+	 *
+	 * @since 1.0.2
+	 * @access public
+	 */
+	public function analyticstracker_ga_forcessl_get () {
+		$saved_options = get_option( 'analyticstracker_settings' );
+		if ( isset($saved_options['analyticstracker_forcessl']) && $saved_options['analyticstracker_forcessl'] != "" ) {
+			echo "ga('set', 'forceSSL', true);\r\n";
+		}
+	}
+
+
+	/**
+	 * Get User ID
+	 *
+	 * @since 1.0.2
+	 * @access public
+	 */
+	public function analyticstracker_ga_userid_get () {
+		if ( is_user_logged_in() ) {
+			$current_user = wp_get_current_user();
+			$saved_options = get_option( 'analyticstracker_settings' );
+			if ( isset($saved_options['analyticstracker_userid']) && $saved_options['analyticstracker_userid'] != "" ) {
+				echo "ga('set', 'userId', '".$current_user->ID."');\r\n";
+			}
+		}
+	}
+
+	/**
+	 * Get Anonymize IP
+	 *
+	 * @since 1.0.2
+	 * @access public
+	 */
+	public function analyticstracker_ga_anonymizeip_get () {
+		$saved_options = get_option( 'analyticstracker_settings' );
+		if ( isset($saved_options['analyticstracker_anonymizeip']) && $saved_options['analyticstracker_anonymizeip'] != "" ) {
+			echo "ga('set', 'anonymizeIp', true);\r\n";
+		}
+	}
+
+
+	/**
+	 * Get Display Features plugin
+	 *
+	 * @since 1.0.2
+	 * @access public
+	 */
+	public function analyticstracker_ga_displayfeatures_get () {
+		$saved_options = get_option( 'analyticstracker_settings' );
+		if ( isset($saved_options['analyticstracker_displayfeatures']) && $saved_options['analyticstracker_displayfeatures'] != "" ) {
+			echo "ga('require', 'displayfeatures');\r\n";
+		}
 	}
 
 
@@ -260,10 +407,29 @@ class AnalyticsTracker {
 			}
 			$atts['value'] = $val;
 		}
+		if ( isset( $options['type'] ) && $options['type'] == 'checkbox' ) {
+			if ( $atts['value'] ) {
+				$atts['checked'] = 'checked';
+			}
+				$atts['value'] = true;
+		}
 
 
 		/**
-		 * Input type text
+		 * Input type Checkbox
+		 */
+		if ($atts['type'] == 'checkbox') {
+			//var_dump( $atts);
+			$html = sprintf( '<input type="%1$s" class="%2$s" id="%3$s" name="%4$s" value="%5$s" %6$s />', $atts['type'], $atts['class'], $atts['id'], $atts['name'], $atts['value'], ( isset( $atts['checked'] ) ? "checked=".$atts['checked'] : '') );
+			if ( array_key_exists( 'description', $atts ) ){
+				$html .= sprintf( '<p class="description">%1$s</p>', $atts['description'] );
+			}
+			echo $html;
+		}
+
+
+		/**
+		 * Input type Text
 		 */
 		if ($atts['type'] == 'text') {
 			$html = sprintf( '<input type="%1$s" class="%2$s" id="%3$s" name="%4$s" value="%5$s"/>', $atts['type'], $atts['class'], $atts['id'], $atts['name'], $atts['value'] );
@@ -273,6 +439,17 @@ class AnalyticsTracker {
 			echo $html;
 		}
 
+
+		/**
+		 * Input type Textarea
+		 */
+		 if ($atts['type'] == 'textarea') {
+ 			$html = sprintf( '<textarea cols="60" rows="5" class="%1$s" id="%2$s" name="%3$s">%4$s</textarea>', $atts['class'], $atts['id'], $atts['name'], $atts['value'] );
+ 			if ( array_key_exists( 'description', $atts ) ){
+ 				$html .= sprintf( '<p class="description">%1$s</p>', $atts['description'] );
+ 			}
+ 			echo $html;
+ 		}
 	}
 
 
