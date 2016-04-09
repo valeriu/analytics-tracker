@@ -75,6 +75,7 @@ class AnalyticsTracker {
 		  <?php $this->analyticstracker_ga_forcessl_get(); ?>
 		  <?php $this->analyticstracker_ga_userid_get(); ?>
 		  <?php $this->analyticstracker_ga_anonymizeip_get(); ?>
+		  <?php $this->analyticstracker_ga_custom_dimension_get(); ?>
 		  ga('send', 'pageview');
 
 		</script>
@@ -174,7 +175,7 @@ class AnalyticsTracker {
 			array(
 				'settings_type' => 'section',
 				'id' => 'analyticstracker_section_settings_general',
-				'title' => '',
+				'title' => 'General Settings',
 				'callback' => 'analyticstracker_description_section_callback',
 				'page' => 'analyticstracker_page'
 			),
@@ -263,6 +264,139 @@ class AnalyticsTracker {
 									'description' => __( 'The plugin works by sending an additional request to stats.g.doubleclick.net that is used to provide advertising features like remarketing and demographics and interest reporting in Google Analytics.', 'analytics-tracker' ),
 				)
 			),
+			//Custom Dimension
+			array(
+				'settings_type' => 'section',
+				'id' => 'analyticstracker_section_settings_custom_dimension',
+				'title' => 'Custom Dimension',
+				'callback' => 'analyticstracker_description_section_cd_callback',
+				'page' => 'analyticstracker_page'
+			),
+			array (
+				'settings_type' => 'field',
+				'id' => 'analyticstracker_custom_dimension',
+				'title' => __( 'Custom Dimension', 'analytics-tracker' ),
+				'callback' => 'analyticstracker_settings_field_render',
+				'page' => 'analyticstracker_page',
+				'section' => 'analyticstracker_section_settings_custom_dimension',
+				'args' => 	array (
+									'id' => 'analyticstracker_custom_dimension',
+									'type' => 'checkbox',
+									'class' => '',
+									'name' => 'analyticstracker_custom_dimension',
+									'value' => 1,
+									'label_for' => '',
+									'description' => __( 'Enable Custom Dimension', 'analytics-tracker' ),
+				)
+			),
+			array (
+				'settings_type' => 'field',
+				'id' => 'analyticstracker_cu_tags',
+				'title' => __( 'Tags', 'analytics-tracker' ),
+				'callback' => 'analyticstracker_settings_field_render',
+				'page' => 'analyticstracker_page',
+				'section' => 'analyticstracker_section_settings_custom_dimension',
+				'args' => 	array (
+								'id' => 'analyticstracker_cu_tags',
+								'type' => 'text',
+								'class' => 'small-text',
+								'name' => 'analyticstracker_cu_tags',
+								'value' => '',
+								'default' => '1',
+								'label_for' => 'analyticstracker_cu_tags',
+								'description' => __( 'The index suffix for tags', 'analytics-tracker' ),
+				)
+			),
+			array (
+				'settings_type' => 'field',
+				'id' => 'analyticstracker_cu_category',
+				'title' => __( 'Category', 'analytics-tracker' ),
+				'callback' => 'analyticstracker_settings_field_render',
+				'page' => 'analyticstracker_page',
+				'section' => 'analyticstracker_section_settings_custom_dimension',
+				'args' => 	array (
+								'id' => 'analyticstracker_cu_category',
+								'type' => 'text',
+								'class' => 'small-text',
+								'name' => 'analyticstracker_cu_category',
+								'value' => '',
+								'default' => '2',
+								'label_for' => 'analyticstracker_cu_category',
+								'description' => __( 'The index suffix for category', 'analytics-tracker' ),
+				)
+			),
+			array (
+				'settings_type' => 'field',
+				'id' => 'analyticstracker_cu_archive',
+				'title' => __( 'Archive', 'analytics-tracker' ),
+				'callback' => 'analyticstracker_settings_field_render',
+				'page' => 'analyticstracker_page',
+				'section' => 'analyticstracker_section_settings_custom_dimension',
+				'args' => 	array (
+								'id' => 'analyticstracker_cu_archive',
+								'type' => 'text',
+								'class' => 'small-text',
+								'name' => 'analyticstracker_cu_archive',
+								'value' => '',
+								'default' => '3',
+								'label_for' => 'analyticstracker_cu_archive',
+								'description' => __( 'The index suffix for archive', 'analytics-tracker' ),
+				)
+			),
+			array (
+				'settings_type' => 'field',
+				'id' => 'analyticstracker_cu_author',
+				'title' => __( 'Author', 'analytics-tracker' ),
+				'callback' => 'analyticstracker_settings_field_render',
+				'page' => 'analyticstracker_page',
+				'section' => 'analyticstracker_section_settings_custom_dimension',
+				'args' => 	array (
+								'id' => 'analyticstracker_cu_author',
+								'type' => 'text',
+								'class' => 'small-text',
+								'name' => 'analyticstracker_cu_author',
+								'value' => '',
+								'default' => '4',
+								'label_for' => 'analyticstracker_cu_author',
+								'description' => __( 'The index suffix for author', 'analytics-tracker' ),
+				)
+			),
+			array (
+				'settings_type' => 'field',
+				'id' => 'analyticstracker_cu_post_format',
+				'title' => __( 'Post Format', 'analytics-tracker' ),
+				'callback' => 'analyticstracker_settings_field_render',
+				'page' => 'analyticstracker_page',
+				'section' => 'analyticstracker_section_settings_custom_dimension',
+				'args' => 	array (
+								'id' => 'analyticstracker_cu_post_format',
+								'type' => 'text',
+								'class' => 'small-text',
+								'name' => 'analyticstracker_cu_post_format',
+								'value' => '',
+								'default' => '5',
+								'label_for' => 'analyticstracker_cu_post_format',
+								'description' => __( 'The index suffix for Post Format', 'analytics-tracker' ),
+				)
+			),
+			array (
+				'settings_type' => 'field',
+				'id' => 'analyticstracker_cu_post_type',
+				'title' => __( 'Post Type', 'analytics-tracker' ),
+					'callback' => 'analyticstracker_settings_field_render',
+				'page' => 'analyticstracker_page',
+				'section' => 'analyticstracker_section_settings_custom_dimension',
+				'args' => 	array (
+								'id' => 'analyticstracker_cu_post_type',
+								'type' => 'text',
+								'class' => 'small-text',
+								'name' => 'analyticstracker_cu_post_type',
+								'value' => '',
+								'default' => '6',
+								'label_for' => 'analyticstracker_cu_post_type',
+								'description' => __( 'The index suffix for Post Type', 'analytics-tracker' ),
+				)
+			),
 		);
 	}
 
@@ -289,7 +423,7 @@ class AnalyticsTracker {
 	 */
 	public function analyticstracker_ga_forcessl_get () {
 		$saved_options = get_option( 'analyticstracker_settings' );
-		if ( isset($saved_options['analyticstracker_forcessl']) && $saved_options['analyticstracker_forcessl'] != "" ) {
+		if ( isset($saved_options['analyticstracker_forcessl']) && $saved_options['analyticstracker_forcessl'] != '' ) {
 			echo "ga('set', 'forceSSL', true);\r\n";
 		}
 	}
@@ -305,7 +439,7 @@ class AnalyticsTracker {
 		if ( is_user_logged_in() ) {
 			$current_user = wp_get_current_user();
 			$saved_options = get_option( 'analyticstracker_settings' );
-			if ( isset($saved_options['analyticstracker_userid']) && $saved_options['analyticstracker_userid'] != "" ) {
+			if ( isset($saved_options['analyticstracker_userid']) && $saved_options['analyticstracker_userid'] != '' ) {
 				echo "ga('set', 'userId', '".$current_user->ID."');\r\n";
 			}
 		}
@@ -319,24 +453,104 @@ class AnalyticsTracker {
 	 */
 	public function analyticstracker_ga_anonymizeip_get () {
 		$saved_options = get_option( 'analyticstracker_settings' );
-		if ( isset($saved_options['analyticstracker_anonymizeip']) && $saved_options['analyticstracker_anonymizeip'] != "" ) {
+		if ( isset($saved_options['analyticstracker_anonymizeip']) && $saved_options['analyticstracker_anonymizeip'] != '' ) {
 			echo "ga('set', 'anonymizeIp', true);\r\n";
 		}
 	}
 
 
 	/**
-	 * Get Display Features plugin
+	 * Get Display Features
 	 *
 	 * @since 1.0.2
 	 * @access public
 	 */
 	public function analyticstracker_ga_displayfeatures_get () {
 		$saved_options = get_option( 'analyticstracker_settings' );
-		if ( isset($saved_options['analyticstracker_displayfeatures']) && $saved_options['analyticstracker_displayfeatures'] != "" ) {
+		if ( isset($saved_options['analyticstracker_displayfeatures']) && $saved_options['analyticstracker_displayfeatures'] != '' ) {
 			echo "ga('require', 'displayfeatures');\r\n";
 		}
 	}
+
+	/**
+	 * Get Custom Dimension
+	 *
+	 * @since 1.0.2
+	 * @access public
+	 */
+	public function analyticstracker_ga_custom_dimension_get () {
+		$saved_options = get_option( 'analyticstracker_settings' );
+		if ( is_singular() ) {
+			global $post;
+			if ( isset($saved_options['analyticstracker_displayfeatures']) && $saved_options['analyticstracker_displayfeatures'] != '' ) {
+				//Tags
+				if (isset($saved_options['analyticstracker_cu_tags']) && $saved_options['analyticstracker_cu_tags'] != '' ) {
+					if ( (int) $saved_options['analyticstracker_cu_tags'] AND  ( $saved_options['analyticstracker_cu_tags'] > 0 && $saved_options['analyticstracker_cu_tags'] < 201 ) ) {
+						$posttags = get_the_tags();
+						if ($posttags) {
+							foreach($posttags as $tag) {
+								echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_tags']."', '".$tag->name."');\r\n";
+							}
+						}
+					} else {
+						// TODO: Errors
+					}
+				}
+				//Category
+				if (isset($saved_options['analyticstracker_cu_category']) && $saved_options['analyticstracker_cu_category'] != '' ) {
+					if ( (int) $saved_options['analyticstracker_cu_category'] AND  ( $saved_options['analyticstracker_cu_category'] > 0 && $saved_options['analyticstracker_cu_category'] < 201 ) ) {
+						$postcategories = get_the_category();
+						if ($postcategories) {
+							foreach($postcategories as $category) {
+								echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_category']."', '".$category->name."');\r\n";
+							}
+						}
+					} else {
+						// TODO: Errors
+					}
+				}
+				//Archive
+				if (isset($saved_options['analyticstracker_cu_archive']) && $saved_options['analyticstracker_cu_archive'] != '' ) {
+					if ( (int) $saved_options['analyticstracker_cu_archive'] AND  ( $saved_options['analyticstracker_cu_archive'] > 0 && $saved_options['analyticstracker_cu_archive'] < 201 ) ) {
+						echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_archive']."', '".get_the_date('Y')."');\r\n";
+						echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_archive']."', '".get_the_date('F')."');\r\n";
+						echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_archive']."', '".get_the_date('l')."');\r\n";
+					} else {
+						// TODO: Errors
+					}
+				}
+
+				//Author
+				if (isset($saved_options['analyticstracker_cu_author']) && $saved_options['analyticstracker_cu_author'] != '' ) {
+					if ( (int) $saved_options['analyticstracker_cu_author'] AND  ( $saved_options['analyticstracker_cu_author'] > 0 && $saved_options['analyticstracker_cu_author'] < 201 ) ) {
+						echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_author']."', '".get_the_author_meta( 'display_name', $post->post_author )."');\r\n";
+					} else {
+						// TODO: Errors
+					}
+				}
+
+				//Post Format
+				if (isset($saved_options['analyticstracker_cu_post_format']) && $saved_options['analyticstracker_cu_post_format'] != '' ) {
+					if ( (int) $saved_options['analyticstracker_cu_post_format'] AND  ( $saved_options['analyticstracker_cu_post_format'] > 0 && $saved_options['analyticstracker_cu_post_format'] < 201 ) ) {
+						$postformat = get_post_format() ? : 'standard';
+						echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_post_format']."', '".$postformat."');\r\n";
+					} else {
+						// TODO: Errors
+					}
+				}
+
+				//Post Type
+				if (isset($saved_options['analyticstracker_cu_post_type']) && $saved_options['analyticstracker_cu_post_type'] != '' ) {
+					if ( (int) $saved_options['analyticstracker_cu_post_type'] AND  ( $saved_options['analyticstracker_cu_post_type'] > 0 && $saved_options['analyticstracker_cu_post_type'] < 201 ) ) {
+						echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_post_type']."', '".$post->post_type."');\r\n";
+					} else {
+						// TODO: Errors
+					}
+				}
+			}
+		}
+	}
+
 
 
 	/**
@@ -345,8 +559,17 @@ class AnalyticsTracker {
 	 * @since 1.0.0
 	 * @access public
 	 */
-	public function analyticstracker_description_section_callback( ) { }
+	public function analyticstracker_description_section_callback( ) {	}
 
+	/**
+	 * Description Section callback for Custom Dimension
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 */
+	public function analyticstracker_description_section_cd_callback( ) {
+		_e('Each custom dimension has an associated index. There is a maximum of 20 custom dimensions (200 for Premium accounts). The index suffix must be a positive integer greater than 0', 'analytics-tracker' );
+	}
 
 	/*
 	 * Setting Initialization
@@ -386,7 +609,7 @@ class AnalyticsTracker {
 	 * @access public
 	 * @param array $args
 	 */
-	public function analyticstracker_settings_field_render( array $options = array() ) {
+		public function analyticstracker_settings_field_render( array $options = array() ) {
 		$saved_options = get_option( 'analyticstracker_settings' );
 
 		$atts = array(
@@ -400,10 +623,10 @@ class AnalyticsTracker {
 		);
 
 		if ( isset( $options['id'] ) ) {
-			if (isset($saved_options[$options['id']]) ) {
+			if ( isset( $saved_options[$options['id']] ) AND  ( $saved_options[$options['id']] != '') )  {
 				$val = $saved_options[$options['id']];
 			} else {
-				$val = ( array_key_exists( 'default', $options ) ? $options['default'] : "" );
+				$val = ( array_key_exists( 'default', $options ) ? $options['default'] : '' );
 			}
 			$atts['value'] = $val;
 		}
