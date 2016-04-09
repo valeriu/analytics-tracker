@@ -486,12 +486,17 @@ class AnalyticsTracker {
 				//Tags
 				if (isset($saved_options['analyticstracker_cu_tags']) && $saved_options['analyticstracker_cu_tags'] != '' ) {
 					if ( (int) $saved_options['analyticstracker_cu_tags'] AND  ( $saved_options['analyticstracker_cu_tags'] > 0 && $saved_options['analyticstracker_cu_tags'] < 201 ) ) {
-						$posttags = get_the_tags();
-						if ($posttags) {
-							foreach($posttags as $tag) {
-								echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_tags']."', '".$tag->name."');\r\n";
+						$at_post_tags = get_the_tags();
+
+						if ($at_post_tags) {
+							foreach($at_post_tags as $tag) {
+								$at_post_tags_array[] = $tag->name;
 							}
+							$at_post_tags_cu = implode( '|', $at_post_tags_array );
+						} else {
+							$at_post_tags_cu = __('No Tags', 'analytics-tracker');
 						}
+						echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_tags']."', '".$at_post_tags_cu."');\r\n";
 					} else {
 						// TODO: Errors
 					}
@@ -499,11 +504,13 @@ class AnalyticsTracker {
 				//Category
 				if (isset($saved_options['analyticstracker_cu_category']) && $saved_options['analyticstracker_cu_category'] != '' ) {
 					if ( (int) $saved_options['analyticstracker_cu_category'] AND  ( $saved_options['analyticstracker_cu_category'] > 0 && $saved_options['analyticstracker_cu_category'] < 201 ) ) {
-						$postcategories = get_the_category();
-						if ($postcategories) {
-							foreach($postcategories as $category) {
-								echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_category']."', '".$category->name."');\r\n";
+						$at_post_categories = get_the_category();
+						if ($at_post_categories) {
+							foreach($at_post_categories as $category) {
+								$at_post_categories_array[] = $category->name;
 							}
+							$at_post_categories_cu = implode( '|', $at_post_categories_array );
+							echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_category']."', '".$at_post_categories_cu."');\r\n";
 						}
 					} else {
 						// TODO: Errors
@@ -512,9 +519,7 @@ class AnalyticsTracker {
 				//Archive
 				if (isset($saved_options['analyticstracker_cu_archive']) && $saved_options['analyticstracker_cu_archive'] != '' ) {
 					if ( (int) $saved_options['analyticstracker_cu_archive'] AND  ( $saved_options['analyticstracker_cu_archive'] > 0 && $saved_options['analyticstracker_cu_archive'] < 201 ) ) {
-						echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_archive']."', '".get_the_date('Y')."');\r\n";
-						echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_archive']."', '".get_the_date('F')."');\r\n";
-						echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_archive']."', '".get_the_date('l')."');\r\n";
+						echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_archive']."', '".get_the_date('Y|m|N|A')."');\r\n";
 					} else {
 						// TODO: Errors
 					}
