@@ -501,6 +501,7 @@ class AnalyticsTracker {
 						// TODO: Errors
 					}
 				}
+
 				//Category
 				if (isset($saved_options['analyticstracker_cu_category']) && $saved_options['analyticstracker_cu_category'] != '' ) {
 					if ( (int) $saved_options['analyticstracker_cu_category'] AND  ( $saved_options['analyticstracker_cu_category'] > 0 && $saved_options['analyticstracker_cu_category'] < 201 ) ) {
@@ -511,11 +512,14 @@ class AnalyticsTracker {
 							}
 							$at_post_categories_cu = implode( '|', $at_post_categories_array );
 							echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_category']."', '".$at_post_categories_cu."');\r\n";
+						}else {
+							$at_post_tags_cu = __('No Category', 'analytics-tracker');
 						}
 					} else {
 						// TODO: Errors
 					}
 				}
+
 				//Archive
 				if (isset($saved_options['analyticstracker_cu_archive']) && $saved_options['analyticstracker_cu_archive'] != '' ) {
 					if ( (int) $saved_options['analyticstracker_cu_archive'] AND  ( $saved_options['analyticstracker_cu_archive'] > 0 && $saved_options['analyticstracker_cu_archive'] < 201 ) ) {
@@ -555,7 +559,6 @@ class AnalyticsTracker {
 			}
 		}
 	}
-
 
 
 	/**
