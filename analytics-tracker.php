@@ -65,7 +65,7 @@ class AnalyticsTracker {
 		$saved_options = get_option( 'analyticstracker_settings' );
 		if(preg_match("/UA-[0-9]{3,9}-[0-9]{1,4}/", $saved_options['analyticstracker_ga']) ) { ?>
 		<script>
-		  (function(i,s,o,g,r,a,m){i['analyticstracker_pageObject']=r;i[r]=i[r]||function(){
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
@@ -497,8 +497,6 @@ class AnalyticsTracker {
 							$at_post_tags_cu = __('No Tags', 'analytics-tracker');
 						}
 						echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_tags']."', '".$at_post_tags_cu."');\r\n";
-					} else {
-						// TODO: Errors
 					}
 				}
 
@@ -515,8 +513,6 @@ class AnalyticsTracker {
 						}else {
 							$at_post_tags_cu = __('No Category', 'analytics-tracker');
 						}
-					} else {
-						// TODO: Errors
 					}
 				}
 
@@ -524,8 +520,6 @@ class AnalyticsTracker {
 				if (isset($saved_options['analyticstracker_cu_archive']) && $saved_options['analyticstracker_cu_archive'] != '' ) {
 					if ( (int) $saved_options['analyticstracker_cu_archive'] AND  ( $saved_options['analyticstracker_cu_archive'] > 0 && $saved_options['analyticstracker_cu_archive'] < 201 ) ) {
 						echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_archive']."', '".get_the_date('Y|m|N|A')."');\r\n";
-					} else {
-						// TODO: Errors
 					}
 				}
 
@@ -533,8 +527,6 @@ class AnalyticsTracker {
 				if (isset($saved_options['analyticstracker_cu_author']) && $saved_options['analyticstracker_cu_author'] != '' ) {
 					if ( (int) $saved_options['analyticstracker_cu_author'] AND  ( $saved_options['analyticstracker_cu_author'] > 0 && $saved_options['analyticstracker_cu_author'] < 201 ) ) {
 						echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_author']."', '".get_the_author_meta( 'display_name', $post->post_author )."');\r\n";
-					} else {
-						// TODO: Errors
 					}
 				}
 
@@ -543,8 +535,6 @@ class AnalyticsTracker {
 					if ( (int) $saved_options['analyticstracker_cu_post_format'] AND  ( $saved_options['analyticstracker_cu_post_format'] > 0 && $saved_options['analyticstracker_cu_post_format'] < 201 ) ) {
 						$postformat = get_post_format() ? : 'standard';
 						echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_post_format']."', '".$postformat."');\r\n";
-					} else {
-						// TODO: Errors
 					}
 				}
 
@@ -552,8 +542,6 @@ class AnalyticsTracker {
 				if (isset($saved_options['analyticstracker_cu_post_type']) && $saved_options['analyticstracker_cu_post_type'] != '' ) {
 					if ( (int) $saved_options['analyticstracker_cu_post_type'] AND  ( $saved_options['analyticstracker_cu_post_type'] > 0 && $saved_options['analyticstracker_cu_post_type'] < 201 ) ) {
 						echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_post_type']."', '".$post->post_type."');\r\n";
-					} else {
-						// TODO: Errors
 					}
 				}
 			}
@@ -576,7 +564,7 @@ class AnalyticsTracker {
 	 * @access public
 	 */
 	public function analyticstracker_description_section_cd_callback( ) {
-		_e('Each custom dimension has an associated index. There is a maximum of 20 custom dimensions (200 for Premium accounts). The index suffix must be a positive integer greater than 0', 'analytics-tracker' );
+		_e('Each custom dimension has an associated index. There is a maximum of 20 custom dimensions (200 for Premium accounts). The index suffix must be a positive integer greater than 0. How to <a href="https://support.google.com/analytics/answer/2709829?hl=en#set_up_custom_dimensions" target="_blank">set up</a> custom dimensions', 'analytics-tracker' );
 	}
 
 	/*
@@ -693,8 +681,9 @@ class AnalyticsTracker {
 	public function analyticstracker_options_page() {
 		?>
 		<div class="wrap">
-			<h2><?php _e( 'Google Analytics Settings', 'analytics-tracker' ); ?></h2>
 			<form action='options.php' method='post'>
+				<h1><?php _e( 'Google Analytics Settings', 'analytics-tracker' ); ?></h1>
+				<?php settings_errors(); ?>
 				<?php
 					settings_fields( 'analyticstracker_page' );
 					do_settings_sections( 'analyticstracker_page' );
