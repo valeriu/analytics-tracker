@@ -1,7 +1,7 @@
 === Analytics Tracker ===
 Plugin Name: Analytics Tracker
 Plugin URI: https://stylishwp.com
-Description: Analytics Tracker makes it super easy to add tracking code on your blog
+Description: Analytics Tracker makes it super easy to add Google Analytics tracking code on your blog
 Contributors: valeriutihai
 Author: Valeriu Tihai
 Author URI: http://valeriu.tihai.ca
@@ -17,11 +17,22 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Analytics Tracker makes it super easy to add tracking code on your blog.
 
 == Description ==
+
+> If you like the plugin, feel free to [rate it](https://wordpress.org/support/view/plugin-reviews/analytics-tracker?rate=5#postform). Thank You!
+
 Analytics Tracker utilizes the latest and greatest features of Universal Google Analytics and makes it super easy to add tracking code on your blog.
 
 This is one of the simplest to use WordPress plugins to insert Google Analytics code on your websites built in WordPress.
 
 Google Analytics is now the most widely used web analytics service on the Internet.
+
+Features:
+* <strong>Force SSL</strong> - Setting forceSSL to true will force http pages to also send all beacons using https.
+* <strong>User ID</strong> - This is intended to be a known identifier for a user provided by the site owner/tracking library user.
+* <strong>Anonymize IP</strong> - The IP address of the sender will be anonymized
+* <strong>Display Features</strong> - The plugin works by sending an additional request to stats.g.doubleclick.net that is used to provide advertising features like remarketing and demographics and interest reporting in Google Analytics.
+* <strong>Custom Dimensions</strong> - You can use custom dimensions to track: Tags, Category, Archive, Author, Post Format, Post Type
+
 
 > <strong>Analytics Tracker on GitHub</strong><br>
 > You can submit feature requests or bugs on [Analytics Tracker](https://github.com/valeriu/analytics-tracker) repository.
@@ -70,6 +81,13 @@ You can translate Analytics Tracker on [translate.wordpress.org](https://transla
 1. Google Analytics Settings
 
 == Changelog ==
+= 1.0.2 =
+* Added Force SSL
+* Added User ID
+* Added Anonymize IP
+* Added Display Features
+* Added Custom Dimensions
+
 = 1.0.1 =
 * Added my WordPress themes
 * Fixed Regex for UA Code
