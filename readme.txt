@@ -1,7 +1,7 @@
 === Analytics Tracker ===
 Plugin Name: Analytics Tracker
 Plugin URI: https://stylishwp.com
-Description: Analytics Tracker makes it super easy to add Google Analytics tracking code on your blog
+Description: Analytics Tracker makes it super easy to add Google Analytics tracking code on your site
 Contributors: valeriutihai
 Author: Valeriu Tihai
 Author URI: http://valeriu.tihai.ca
@@ -9,12 +9,12 @@ Text Domain: analytics-tracker
 Tags: Google Analytics, Analytics Tracker, Tracking Code, UA Code, Universal Analytics, Visits statistics, Web Stats, WordPress Google Analytics
 Donate link: https://paypal.me/valeriu/5
 Requires at least: 4.2
-Tested up to: 4.4.2
-Stable tag: 1.0.1
+Tested up to: 4.5.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Analytics Tracker makes it super easy to add tracking code on your blog.
+Analytics Tracker makes it super easy to add Google Analytics tracking code on your site
 
 == Description ==
 
@@ -26,7 +26,7 @@ This is one of the simplest to use WordPress plugins to insert Google Analytics 
 
 Google Analytics is now the most widely used web analytics service on the Internet.
 
-Features:
+= Features: =
 * <strong>Force SSL</strong> - Setting forceSSL to true will force http pages to also send all beacons using https.
 * <strong>User ID</strong> - This is intended to be a known identifier for a user provided by the site owner/tracking library user.
 * <strong>Anonymize IP</strong> - The IP address of the sender will be anonymized
@@ -81,6 +81,8 @@ You can translate Analytics Tracker on [translate.wordpress.org](https://transla
 1. Google Analytics Settings
 
 == Changelog ==
+= 1.0.3 =
+
 = 1.0.2 =
 * Added Force SSL
 * Added User ID

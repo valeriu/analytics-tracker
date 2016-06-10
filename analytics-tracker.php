@@ -2,10 +2,10 @@
 /*
  * Plugin Name: Analytics Tracker
  * Plugin URI: https://stylishwp.com
- * Description: Analytics Tracker makes it super easy to add Google Analytics tracking code on your blog
+ * Description: Analytics Tracker makes it super easy to add Google Analytics tracking code on your site
  * Text Domain: analytics-tracker
  * Domain Path: /languages
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Valeriu Tihai
  * Author URI: http://valeriu.tihai.ca
  * Contributors: valeriutihai
