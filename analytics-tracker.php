@@ -72,6 +72,7 @@ class AnalyticsTracker {
 
 		  <?php $this->analyticstracker_ga_get(); ?>
 		  <?php $this->analyticstracker_ga_displayfeatures_get(); ?>
+		  <?php $this->analyticstracker_ga_enhancedlinkatt_get(); ?>
 		  <?php $this->analyticstracker_ga_forcessl_get(); ?>
 		  <?php $this->analyticstracker_ga_userid_get(); ?>
 		  <?php $this->analyticstracker_ga_anonymizeip_get(); ?>
@@ -264,6 +265,24 @@ class AnalyticsTracker {
 									'description' => __( 'The plugin works by sending an additional request to stats.g.doubleclick.net that is used to provide advertising features like remarketing and demographics and interest reporting in Google Analytics.', 'analytics-tracker' ),
 				)
 			),
+			array (
+				'settings_type' => 'field',
+				'id' => 'analyticstracker_enhancedlinkatt',
+				'title' => __( 'Enhanced Link Attribution', 'analytics-tracker' ),
+				'callback' => 'analyticstracker_settings_field_render',
+				'page' => 'analyticstracker_page',
+				'section' => 'analyticstracker_section_settings_general',
+				'args' => 	array (
+									'id' => 'analyticstracker_enhancedlinkatt',
+									'type' => 'checkbox',
+									'class' => '',
+									'name' => 'analyticstracker_enhancedlinkatt',
+									'value' => 1,
+									'label_for' => '',
+									'description' => __( 'Enhanced Link Attribution improves the accuracy of your In-Page Analytics report by automatically differentiating between multiple links to the same URL on a single page by using link element IDs.', 'analytics-tracker' ),
+				)
+			),
+
 			//Custom Dimension
 			array(
 				'settings_type' => 'section',
@@ -471,6 +490,21 @@ class AnalyticsTracker {
 			echo "ga('require', 'displayfeatures');\r\n";
 		}
 	}
+
+
+	/**
+	 * Get Enhanced Link Attribution
+	 *
+	 * @since 1.0.3
+	 * @access public
+	 */
+	public function analyticstracker_ga_enhancedlinkatt_get () {
+		$saved_options = get_option( 'analyticstracker_settings' );
+		if ( isset($saved_options['analyticstracker_enhancedlinkatt']) && $saved_options['analyticstracker_enhancedlinkatt'] != '' ) {
+			echo "ga('require', 'linkid');\r\n";
+		}
+	}
+
 
 	/**
 	 * Get Custom Dimension
