@@ -33,6 +33,7 @@ Google Analytics is now the most widely used web analytics service on the Intern
 * <strong>Display Features</strong> - The plugin works by sending an additional request to stats.g.doubleclick.net that is used to provide advertising features like remarketing and demographics and interest reporting in Google Analytics.
 * <strong>Enhanced Link Attribution</strong> - Enhanced Link Attribution improves the accuracy of your In-Page Analytics report by automatically differentiating between multiple links to the same URL on a single page by using link element IDs.
 * <strong>Custom Dimensions</strong> - You can use custom dimensions to track: Tags, Category, Archive, Author, Post Format, Post Type
+* <strong>Event</strong> -  for Download, Email, Phone number, Outbound links, Error 404, Search
 
 
 > <strong>Analytics Tracker on GitHub</strong><br>
@@ -84,6 +85,7 @@ You can translate Analytics Tracker on [translate.wordpress.org](https://transla
 == Changelog ==
 = 1.0.3 =
 * Added Enhanced Link Attribution
+* Added Events for Download, Email, Phone number, Outbound links, Error 404, Search
 
 = 1.0.2 =
 * Added Force SSL

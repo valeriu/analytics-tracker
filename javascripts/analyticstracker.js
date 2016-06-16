@@ -30,7 +30,11 @@
 				if ((this.protocol === 'http:' || this.protocol === 'https:') && this.hostname.indexOf(document.location.hostname) === -1) {
 					ga('send', 'event', 'Outbound', this.hostname, this.pathname);
 				}
+
 			});
+			if($('body').hasClass('error404')) {
+				ga('send', 'event', 'Error', '404', 'page: ' + document.location.pathname + document.location.search + ' ref: ' + document.referrer, {'nonInteraction': 1});
+			}
 		},
 	};
 

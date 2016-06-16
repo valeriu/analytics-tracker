@@ -75,6 +75,7 @@ class AnalyticsTracker {
 
 		  <?php $this->analyticstracker_ga_get(); ?>
 		  <?php $this->analyticstracker_ga_displayfeatures_get(); ?>
+		  <?php $this->analyticstracker_ga_events_get(); ?>
 		  <?php $this->analyticstracker_ga_enhancedlinkatt_get(); ?>
 		  <?php $this->analyticstracker_ga_forcessl_get(); ?>
 		  <?php $this->analyticstracker_ga_userid_get(); ?>
@@ -98,16 +99,6 @@ class AnalyticsTracker {
 	 */
 	public function analyticstracker_load_textdomain() {
 		load_plugin_textdomain( 'analytics-tracker', false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
-	}
-
-	/**
-	 * Add JavaScript file
-	 *
-	 * @since 1.0.3
-	 * @access  public
-	 */
-	function analyticstracker_load_js() {
-		wp_enqueue_script( 'analyticstracker-js', plugins_url( '/javascripts/analyticstracker.js' , __FILE__ ), array( 'jquery' ) );
 	}
 
 
@@ -294,6 +285,23 @@ class AnalyticsTracker {
 									'value' => 1,
 									'label_for' => '',
 									'description' => __( 'Enhanced Link Attribution improves the accuracy of your In-Page Analytics report by automatically differentiating between multiple links to the same URL on a single page by using link element IDs.', 'analytics-tracker' ),
+				)
+			),
+			array (
+				'settings_type' => 'field',
+				'id' => 'analyticstracker_events',
+				'title' => __( 'Event Tracking', 'analytics-tracker' ),
+				'callback' => 'analyticstracker_settings_field_render',
+				'page' => 'analyticstracker_page',
+				'section' => 'analyticstracker_section_settings_general',
+				'args' => 	array (
+									'id' => 'analyticstracker_events',
+									'type' => 'checkbox',
+									'class' => '',
+									'name' => 'analyticstracker_events',
+									'value' => 1,
+									'label_for' => '',
+									'description' => __( 'Track events feature: Downloads, Emails, Phone numbers Error 404, Search and Outbound links', 'analytics-tracker' ),
 				)
 			),
 
@@ -519,6 +527,35 @@ class AnalyticsTracker {
 		}
 	}
 
+
+	/**
+	 * Add JavaScript file
+	 *
+	 * @since 1.0.3
+	 * @access  public
+	 */
+	function analyticstracker_load_js() {
+		$saved_options = get_option( 'analyticstracker_settings' );
+		if ( isset($saved_options['analyticstracker_events']) && $saved_options['analyticstracker_events'] != '' ) {
+			wp_enqueue_script( 'analyticstracker-js', plugins_url( '/javascripts/analyticstracker.js' , __FILE__ ), array( 'jquery' ) );
+		}
+
+	}
+	/**
+	 * Get Search Events
+	 *
+	 * @since 1.0.3
+	 * @access  public
+	 */
+	function analyticstracker_ga_events_get() {
+		$saved_options = get_option( 'analyticstracker_settings' );
+		if ( isset($saved_options['analyticstracker_events']) && $saved_options['analyticstracker_events'] != '' ) {
+			if (  is_search() ) {
+				echo "ga('send', 'event', 'Search', '".get_search_query( false )."');\r\n";
+			}
+		}
+
+	}
 
 	/**
 	 * Get Custom Dimension
