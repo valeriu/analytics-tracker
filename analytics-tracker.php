@@ -52,6 +52,9 @@ class AnalyticsTracker {
 		// Setting Initialization
 		add_action( 'admin_init', array( &$this, 'analyticstracker_settings_init' ), 1 );
 
+		// Load external JavaScript
+		add_action( 'wp_enqueue_scripts', array( &$this, 'analyticstracker_load_js' ), 1 );
+
 	}
 
 
@@ -97,6 +100,16 @@ class AnalyticsTracker {
 		load_plugin_textdomain( 'analytics-tracker', false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
 	}
 
+	/**
+	 * Add JavaScript file
+	 *
+	 * @since 1.0.3
+	 * @access  public
+	 */
+	function analyticstracker_load_js() {
+		wp_enqueue_script( 'analyticstracker-js', plugins_url( '/javascripts/analyticstracker.js' , __FILE__ ), array( 'jquery' ) );
+	}
+
 
 	/**
 	 * Add settings links to plugin page
@@ -108,6 +121,7 @@ class AnalyticsTracker {
 		$links[] = '<a href="https://wordpress.org/support/plugin/analytics-tracker" target="_blank">'.__("Support", 'analytics-tracker').'</a>';
 		return $links;
 	}
+
 
 	/**
 	 * Add plugin menu
