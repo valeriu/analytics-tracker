@@ -9,8 +9,8 @@ Text Domain: analytics-tracker
 Tags: Google Analytics, Analytics Tracker, Tracking Code, UA Code, Universal Analytics, Visits statistics, Web Stats, WordPress Google Analytics
 Donate link: https://paypal.me/valeriu/5
 Requires at least: 4.2
-Tested up to: 4.5.2
-Stable tag: 1.0.3
+Tested up to: 4.5.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -83,6 +83,8 @@ You can translate Analytics Tracker on [translate.wordpress.org](https://transla
 1. Google Analytics Settings
 
 == Changelog ==
+= 1.0.4 =
+
 = 1.0.3 =
 * Added Enhanced Link Attribution
 * Added Events for Download, Email, Phone number, Outbound links, Error 404, Search
