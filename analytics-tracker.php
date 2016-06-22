@@ -597,7 +597,7 @@ class AnalyticsTracker {
 		$saved_options = get_option( 'analyticstracker_settings' );
 		if ( is_singular() ) {
 			global $post;
-			if ( isset($saved_options['analyticstracker_displayfeatures']) && $saved_options['analyticstracker_displayfeatures'] != '' ) {
+			if ( isset($saved_options['analyticstracker_custom_dimension']) && $saved_options['analyticstracker_custom_dimension'] != '' ) {
 				//Tags
 				if (isset($saved_options['analyticstracker_cu_tags']) && $saved_options['analyticstracker_cu_tags'] != '' ) {
 					if ( (int) $saved_options['analyticstracker_cu_tags'] AND  ( $saved_options['analyticstracker_cu_tags'] > 0 && $saved_options['analyticstracker_cu_tags'] < 201 ) ) {

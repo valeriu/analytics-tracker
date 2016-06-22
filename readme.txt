@@ -85,6 +85,7 @@ You can translate Analytics Tracker on [translate.wordpress.org](https://transla
 == Changelog ==
 = 1.0.4 =
 * Added event for Add a Comment
+* Fixed Options for Custom dimension
 
 = 1.0.3 =
 * Added Enhanced Link Attribution
