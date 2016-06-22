@@ -55,6 +55,8 @@ class AnalyticsTracker {
 		// Load external JavaScript
 		add_action( 'wp_enqueue_scripts', array( &$this, 'analyticstracker_load_js' ), 1 );
 
+		//Add Comment meta
+		add_action('wp_insert_comment', array(&$this, 'analyticstracker_ga_comment_meta'), 99, 2);
 	}
 
 
@@ -534,28 +536,56 @@ class AnalyticsTracker {
 	 * @since 1.0.3
 	 * @access  public
 	 */
-	function analyticstracker_load_js() {
+	public function analyticstracker_load_js() {
 		$saved_options = get_option( 'analyticstracker_settings' );
 		if ( isset($saved_options['analyticstracker_events']) && $saved_options['analyticstracker_events'] != '' ) {
 			wp_enqueue_script( 'analyticstracker-js', plugins_url( '/javascripts/analyticstracker.js' , __FILE__ ), array( 'jquery' ) );
 		}
 
 	}
+
+
 	/**
-	 * Get Search Events
+	 * Get Search and Add a comment Events
 	 *
 	 * @since 1.0.3
 	 * @access  public
 	 */
-	function analyticstracker_ga_events_get() {
+	public function analyticstracker_ga_events_get() {
 		$saved_options = get_option( 'analyticstracker_settings' );
 		if ( isset($saved_options['analyticstracker_events']) && $saved_options['analyticstracker_events'] != '' ) {
 			if (  is_search() ) {
 				echo "ga('send', 'event', 'Search', '".get_search_query( false )."');\r\n";
 			}
 		}
-
+		//Add a comment Event
+		if ( is_singular() ) {
+			global $post;
+			$args = array(
+				'meta_key' => 'analyticstracker_comment_event',
+				'post_id' => $post->ID,
+			);
+			$at_comments = get_comments($args);
+			foreach($at_comments as $at_comment){
+				echo "ga('send', 'event', 'Comments', '".$at_comment->comment_author."', 'Post ID: ".$at_comment->comment_post_ID."', '".$at_comment->comment_ID."');\r\n";
+				delete_comment_meta( $at_comment->comment_ID, 'analyticstracker_comment_event');
+			}
+		}
 	}
+
+
+	/**
+	 * Add comment meta for analytics tracker event
+	 *
+	 * @since 1.0.4
+	 * @access  public
+	 */
+	public function analyticstracker_ga_comment_meta ( $comment_id, $comment_object ) {
+		if ($comment_object->comment_approved == 1) {
+			add_comment_meta( $comment_id, 'analyticstracker_comment_event', 1, true );
+		}
+	}
+
 
 	/**
 	 * Get Custom Dimension
