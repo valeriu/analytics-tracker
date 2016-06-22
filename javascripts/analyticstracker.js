@@ -32,9 +32,16 @@
 				}
 
 			});
+			//Event for Error 404
 			if($('body').hasClass('error404')) {
 				ga('send', 'event', 'Error', '404', 'page: ' + document.location.pathname + document.location.search + ' ref: ' + document.referrer, {'nonInteraction': 1});
 			}
+			//Event for Scroll Depth
+			$.scrollDepth({
+				pixelDepth: false,
+				userTiming: false,
+				gtmOverride: false,
+			});
 		},
 	};
 

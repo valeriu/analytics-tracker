@@ -303,7 +303,7 @@ class AnalyticsTracker {
 									'name' => 'analyticstracker_events',
 									'value' => 1,
 									'label_for' => '',
-									'description' => __( 'Track events feature: Downloads, Emails, Phone numbers Error 404, Search and Outbound links', 'analytics-tracker' ),
+									'description' => __( 'Track events feature: Downloads, Emails, Phone numbers Error 404, Search and Outbound links, Add a comment, Scroll Depth', 'analytics-tracker' ),
 				)
 			),
 
@@ -539,7 +539,8 @@ class AnalyticsTracker {
 	public function analyticstracker_load_js() {
 		$saved_options = get_option( 'analyticstracker_settings' );
 		if ( isset($saved_options['analyticstracker_events']) && $saved_options['analyticstracker_events'] != '' ) {
-			wp_enqueue_script( 'analyticstracker-js', plugins_url( '/javascripts/analyticstracker.js' , __FILE__ ), array( 'jquery' ) );
+			wp_enqueue_script( 'analyticstracker-js', plugins_url( '/javascripts/analyticstracker.js' , __FILE__ ), array( 'jquery', 'analyticstracker-jquery-scrolldepth' ) );
+			wp_enqueue_script( 'analyticstracker-jquery-scrolldepth', plugins_url( '/javascripts/vendors/jquery-scrolldepth/jquery.scrolldepth.min.js' , __FILE__ ), array( 'jquery' ) );
 		}
 
 	}
