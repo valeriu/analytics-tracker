@@ -55,6 +55,9 @@ class AnalyticsTracker {
 		// Load external JavaScript
 		add_action( 'wp_enqueue_scripts', array( &$this, 'analyticstracker_load_js' ), 1 );
 
+		// Load external JavaScript
+		add_action( 'admin_enqueue_scripts', array( &$this, 'analyticstracker_enqueue_admin' ), 1 );
+
 		//Add Comment meta
 		add_action('wp_insert_comment', array(&$this, 'analyticstracker_ga_comment_meta'), 99, 2);
 	}
@@ -165,6 +168,10 @@ class AnalyticsTracker {
 						<a href="<?php echo esc_url( 'http://themeforest.net/item/campevent-conference-event-wordpress-theme/11439450?ref=stylishwp' ); ?>" target="_blank"><?php _e('CampEvent', 'analytics-tracker'); ?></a> - <?php _e('CampEvent is a WordPress theme that allow to easily configure event, exhibitions, conventions, trade shows, seminars, workshops, meetup by adding detailed information about speakers, sponsors, schedule and much more.', 'analytics-tracker'); ?>
 					</li>
 				</ul>
+			</div>
+			<div class='card pressthis'>
+				<h2><a target="_blank" title="<?php _e('Daily Beautiful WordPress Templates for your business', 'analytics-tracker'); ?>" href="https://dailydesign.ca/?utm_source=DailyDesign&utm_medium=Recommendations&utm_campaign=AnalyticsTracker"><?php _e( 'Daily Design Cafe', 'analytics-tracker' ); ?> ☕</a></h2>
+				<div class="dailydesign_container"></div>
 			</div>
 		</div>
 	<?php
@@ -542,7 +549,21 @@ class AnalyticsTracker {
 			wp_enqueue_script( 'analyticstracker-js', plugins_url( '/javascripts/analyticstracker.js' , __FILE__ ), array( 'jquery', 'analyticstracker-jquery-scrolldepth' ) );
 			wp_enqueue_script( 'analyticstracker-jquery-scrolldepth', plugins_url( '/javascripts/vendors/jquery-scrolldepth/jquery.scrolldepth.min.js' , __FILE__ ), array( 'jquery' ) );
 		}
+	}
 
+	/**
+	 * Add JavaScript and CSS files to wp-admin
+	 *
+	 * @since 1.0.4
+	 * @access  public
+	 */
+	public function analyticstracker_enqueue_admin($hook) {
+		if ( 'google-analytics_page_analyticstracker-other-plugins' == $hook ) {
+			wp_enqueue_script( 'analyticstracker-js-admin', plugins_url( '/javascripts/analyticstracker-admin.js' , __FILE__ ), array( 'jquery' ) );
+
+			wp_register_style( 'analyticstracker-css-admin', plugins_url( '/analytics-tracker/css/analyticstracker-admin.css', false, '1.0.0' ) );
+			wp_enqueue_style( 'analyticstracker-css-admin' );
+		}
 	}
 
 
