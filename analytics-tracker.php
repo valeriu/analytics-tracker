@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: Analytics Tracker
- * Plugin URI: https://stylishwp.com
+ * Plugin URI: https://stylishwp.com/product/wordpress-plugins/google-analytics-tracker/
  * Description: Analytics Tracker makes it super easy to add Google Analytics tracking code on your site
  * Text Domain: analytics-tracker
  * Domain Path: /languages
