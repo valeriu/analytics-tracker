@@ -18,16 +18,16 @@
 				var this_at = $(this);
 				var href_at = this_at.prop('href').split('?')[0];
 				var ext_at = href_at.split('.').pop();
-				if ('7z, ai, avi, cbr, csv, doc, docx, exe, gz, jar, midi, mov, mp3, pdf, pdn, pez, pot, ppt, pptx, psd, pub, rar, tar, torrent, tsv, txt, wav, wma, wmv, wwf, xls, xlsx, zip'.split(',').indexOf(ext_at) !== -1) {
+				if ('7z, ai, avi, cbr, csv, doc, docx, exe, gz, jar, midi, mov, mp3, pdf, pdn, pez, pot, ppt, pptx, psd, pub, rar, tar, torrent, tsv, txt, wav, wma, wmv, wwf, xls, xlsx, zip'.indexOf(ext_at) !== -1) {
 					ga('send', 'event', 'Download', ext_at, href_at);
 				}
-				if (href_at.toLowerCase().indexOf('mailto:') === 0) {
+				else if (href_at.toLowerCase().indexOf('mailto:') === 0) {
 					ga('send', 'event', 'Email', href_at.substr(7));
 				}
-				if (href_at.toLowerCase().indexOf('tel:') === 0) {
+				else if (href_at.toLowerCase().indexOf('tel:') === 0) {
 					ga('send', 'event', 'Phone number', href_at.substr(4));
 				}
-				if ((this.protocol === 'http:' || this.protocol === 'https:') && this.hostname.indexOf(document.location.hostname) === -1) {
+				else if ((this.protocol === 'http:' || this.protocol === 'https:') && this.hostname.indexOf(document.location.hostname) === -1) {
 					ga('send', 'event', 'Outbound', this.hostname, this.pathname);
 				}
 
