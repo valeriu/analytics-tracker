@@ -5,9 +5,9 @@
  * Description: Analytics Tracker makes it super easy to add Google Analytics tracking code on your site
  * Text Domain: analytics-tracker
  * Domain Path: /languages
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: Valeriu Tihai
- * Author URI: http://valeriu.tihai.ca
+ * Author URI: https://valeriu.tihai.ca
  * Contributors: valeriutihai
  * Donate link: https://paypal.me/valeriu/5
  * License: GPLv2 or later
@@ -170,7 +170,7 @@ class AnalyticsTracker {
 				</ul>
 			</div>
 			<div class='card pressthis'>
-				<h2><a target="_blank" title="<?php _e('Daily Beautiful WordPress Templates for your business', 'analytics-tracker'); ?>" href="https://dailydesign.ca/?utm_source=DailyDesign&utm_medium=Recommendations&utm_campaign=AnalyticsTracker"><?php _e( 'Daily Design Cafe', 'analytics-tracker' ); ?> ☕</a></h2>
+				<h2><a target="_blank" title="<?php _e('Daily Beautiful WordPress Templates for your business', 'analytics-tracker'); ?>" href="https://dailydesigncafe.com/?utm_source=DailyDesign&utm_medium=Recommendations&utm_campaign=AnalyticsTracker"><?php _e( 'Daily Design Cafe', 'analytics-tracker' ); ?> ☕</a></h2>
 				<div class="dailydesign_container"></div>
 			</div>
 		</div>

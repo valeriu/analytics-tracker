@@ -16,10 +16,10 @@
     ShowProduct: function () {
 
         $.ajax( {
-          url: 'https://dailydesign.ca/wp-json/wp/v2/post_product-api',
+          url: 'https://dailydesigncafe.com/wp-json/wp/v2/post_product-api',
           data: {
-              filter: {
-              'posts_per_page': 1,
+			  per_page: 1,
+			  filter: {
 			  'orderby': 'rand'
 		  	},
           },

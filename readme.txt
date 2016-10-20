@@ -9,8 +9,8 @@ Text Domain: analytics-tracker
 Tags: Google Analytics, Analytics Tracker, Tracking Code, UA Code, Universal Analytics, Visits statistics, Web Stats, WordPress Google Analytics
 Donate link: https://paypal.me/valeriu/5
 Requires at least: 4.2
-Tested up to: 4.6
-Stable tag: 1.0.4
+Tested up to: 4.6.1
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,8 @@ Analytics Tracker makes it super easy to add Google Analytics tracking code on y
 > If you like the plugin, feel free to [rate it](https://wordpress.org/support/view/plugin-reviews/analytics-tracker?rate=5#postform). Thank You!
 
 Analytics Tracker utilizes the latest and greatest features of Universal Google Analytics and makes it super easy to add tracking code on your blog.
+
+[youtube https://www.youtube.com/watch?v=emtS4LMBFI0]
 
 This is one of the simplest to use WordPress plugins to insert Google Analytics code on your websites built in WordPress.
 
@@ -83,6 +85,9 @@ You can translate Analytics Tracker on [translate.wordpress.org](https://transla
 1. Google Analytics Settings
 
 == Changelog ==
+= 1.0.5 =
+* Fixed Event for Download, Email, Phone number and Outbound links
+
 = 1.0.4 =
 * Added event for Add a Comment
 * Added event for Scroll Depth
@@ -100,7 +105,7 @@ You can translate Analytics Tracker on [translate.wordpress.org](https://transla
 * Added Custom Dimensions
 
 = 1.0.1 =
-* Added my WordPress themes
+* Added my WordPress Themes
 * Fixed Regex for UA Code
 
 = 1.0.0 =
