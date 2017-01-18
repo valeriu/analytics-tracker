@@ -5,7 +5,7 @@
  * Description: Analytics Tracker makes it super easy to add Google Analytics tracking code on your site
  * Text Domain: analytics-tracker
  * Domain Path: /languages
- * Version: 1.0.5
+ * Version: 1.1.0
  * Author: Valeriu Tihai
  * Author URI: https://valeriu.tihai.ca
  * Contributors: valeriutihai
@@ -43,6 +43,12 @@ class AnalyticsTracker {
 		// Add GA code
 		add_action('wp_head', array( &$this, 'analyticstracker_ga_script' ), 3 );
 
+		//Add AMP analytics JavaScript
+		add_action( 'amp_post_template_head', array(&$this, 'analyticstracker_amp_analytics_scripts' ), 1 );
+
+		//Add AMP analytics tracking code
+		add_action( 'amp_post_template_footer', array(&$this, 'analyticstracker_amp_analytics_code' ), 1 );
+
 		// Add Admin menu
 		add_action( 'admin_menu', array( $this, 'analyticstracker_admin_menu' ), 4 );
 
@@ -60,6 +66,7 @@ class AnalyticsTracker {
 
 		//Add Comment meta
 		add_action('wp_insert_comment', array(&$this, 'analyticstracker_ga_comment_meta'), 99, 2);
+
 	}
 
 
@@ -90,6 +97,47 @@ class AnalyticsTracker {
 
 		</script>
 	<?php }
+	}
+
+
+	/**
+	 * Adding amp-analytics script to head
+	 *
+	 * @since 1.1.0
+	 * @access public
+	 */
+	public function analyticstracker_amp_analytics_scripts(){ ?>
+		<script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+	<?php
+	}
+
+
+	/**
+	 * Adding amp-analytics tracking code
+	 *
+	 * @since 1.1.0
+	 * @access public
+	 */
+	public function analyticstracker_amp_analytics_code() {
+		$saved_options = get_option( 'analyticstracker_settings' );
+		if(preg_match("/UA-[0-9]{3,9}-[0-9]{1,4}/", $saved_options['analyticstracker_ga']) ) { ?>
+			<amp-analytics type="googleanalytics" id="googleanalytics1">
+				<script type="application/json">
+					{
+						"vars": {
+							"account": "<?php echo $saved_options['analyticstracker_ga']; ?>"
+						},
+						"triggers": {
+							"trackPageview": {
+								"on": "visible",
+								"request": "pageview"
+							}
+						}
+					}
+				</script>
+			</amp-analytics>
+		<?php
+		}
 	}
 
 
