@@ -5,7 +5,7 @@
  * Description: Analytics Tracker makes it super easy to add Google Analytics tracking code on your site
  * Text Domain: analytics-tracker
  * Domain Path: /languages
- * Version: 1.1.0
+ * Version: 1.1.1
  * Author: Valeriu Tihai
  * Author URI: https://valeriu.tihai.ca
  * Contributors: valeriutihai
@@ -625,7 +625,7 @@ class AnalyticsTracker {
 		$saved_options = get_option( 'analyticstracker_settings' );
 		if ( isset($saved_options['analyticstracker_events']) && $saved_options['analyticstracker_events'] != '' ) {
 			if (  is_search() ) {
-				echo "ga('send', 'event', 'Search', '".get_search_query( false )."');\r\n";
+				echo "ga('send', 'event', 'Search', '".get_search_query( true )."');\r\n";
 			}
 		}
 		//Add a comment Event
