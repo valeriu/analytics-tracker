@@ -5,9 +5,9 @@ if ( !defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 // Delete the option from the options table
-if (is_multisite()) {
-	delete_site_option('analyticstracker_settings');
+if ( is_multisite() ) {
+	delete_site_option( 'analyticstracker_settings' );
 } else {
-	delete_option('analyticstracker_settings');
+	delete_option( 'analyticstracker_settings' );
 }
 ?>

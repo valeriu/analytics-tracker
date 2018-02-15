@@ -5,7 +5,7 @@
  * Description: Analytics Tracker makes it super easy to add Google Analytics tracking code on your site
  * Text Domain: analytics-tracker
  * Domain Path: /languages
- * Version: 1.1.1
+ * Version: 2.0.0
  * Author: Valeriu Tihai
  * Author URI: https://valeriu.tihai.ca
  * Contributors: valeriutihai
@@ -41,13 +41,13 @@ class AnalyticsTracker {
 		add_filter( 'plugin_action_links_'.plugin_basename(__FILE__), array( &$this, 'analyticstracker_links' ), 1 );
 
 		// Add GA code
-		add_action('wp_head', array( &$this, 'analyticstracker_ga_script' ), 3 );
+		add_action( 'wp_head', array( &$this, 'analyticstracker_ga_script' ), 3 );
 
 		//Add AMP analytics JavaScript
-		add_action( 'amp_post_template_head', array(&$this, 'analyticstracker_amp_analytics_scripts' ), 1 );
+		add_action( 'amp_post_template_head', array( &$this, 'analyticstracker_amp_analytics_scripts' ), 1 );
 
 		//Add AMP analytics tracking code
-		add_action( 'amp_post_template_footer', array(&$this, 'analyticstracker_amp_analytics_code' ), 1 );
+		add_action( 'amp_post_template_footer', array( &$this, 'analyticstracker_amp_analytics_code' ), 1 );
 
 		// Add Admin menu
 		add_action( 'admin_menu', array( $this, 'analyticstracker_admin_menu' ), 4 );
@@ -65,40 +65,9 @@ class AnalyticsTracker {
 		add_action( 'admin_enqueue_scripts', array( &$this, 'analyticstracker_enqueue_admin' ), 1 );
 
 		//Add Comment meta
-		add_action('wp_insert_comment', array(&$this, 'analyticstracker_ga_comment_meta'), 99, 2);
+		add_action( 'wp_insert_comment', array( &$this, 'analyticstracker_ga_comment_meta' ), 99, 2 );
 
 	}
-
-
-	/**
-	 * Insert Google Analytics code
-	 *
-	 * @since 1.0.0
-	 * @access public
-	 */
-	public function analyticstracker_ga_script() {
-		$saved_options = get_option( 'analyticstracker_settings' );
-		if(preg_match("/UA-[0-9]{3,9}-[0-9]{1,4}/", $saved_options['analyticstracker_ga']) ) { ?>
-		<script>
-		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-		  <?php $this->analyticstracker_ga_get(); ?>
-		  <?php $this->analyticstracker_ga_displayfeatures_get(); ?>
-		  <?php $this->analyticstracker_ga_events_get(); ?>
-		  <?php $this->analyticstracker_ga_enhancedlinkatt_get(); ?>
-		  <?php $this->analyticstracker_ga_forcessl_get(); ?>
-		  <?php $this->analyticstracker_ga_userid_get(); ?>
-		  <?php $this->analyticstracker_ga_anonymizeip_get(); ?>
-		  <?php $this->analyticstracker_ga_custom_dimension_get(); ?>
-		  ga('send', 'pageview');
-
-		</script>
-	<?php }
-	}
-
 
 	/**
 	 * Adding amp-analytics script to head
@@ -162,7 +131,7 @@ class AnalyticsTracker {
 	 * @access  public
 	 */
 	public function analyticstracker_links( $links ) {
-		$links[] = '<a href="https://wordpress.org/support/plugin/analytics-tracker" target="_blank">'.__("Support", 'analytics-tracker').'</a>';
+		$links[] = '<a href="https://wordpress.org/support/plugin/analytics-tracker" target="_blank">'.__( 'Support', 'analytics-tracker' ).'</a>';
 		return $links;
 	}
 
@@ -174,8 +143,8 @@ class AnalyticsTracker {
 	 * @access  public
 	 */
 	public function analyticstracker_admin_menu() {
-		add_menu_page( __('Google Analytics', 'analytics-tracker'), __('Google Analytics', 'analytics-tracker'), 'manage_options', 'analyticstracker-menu', array( $this, 'analyticstracker_options_page'), 'dashicons-chart-line' );
-		add_submenu_page( 'analyticstracker-menu', __('Other Products', 'analytics-tracker'), __('Other Products', 'analytics-tracker'), 'manage_options', 'analyticstracker-other-plugins', array( $this, 'analyticstracker_other_plugins' ) );
+		add_menu_page( __( 'Google Analytics', 'analytics-tracker' ), __( 'Google Analytics', 'analytics-tracker' ), 'manage_options', 'analyticstracker-menu', array( $this, 'analyticstracker_options_page' ), 'dashicons-chart-line' );
+		add_submenu_page( 'analyticstracker-menu', __( 'Other Products', 'analytics-tracker' ), __( 'Other Products', 'analytics-tracker' ), 'manage_options', 'analyticstracker-other-plugins', array( $this, 'analyticstracker_other_plugins' ) );
 	}
 
 
@@ -193,13 +162,13 @@ class AnalyticsTracker {
 				<h2><?php _e( 'WordPress Plugins', 'analytics-tracker' ); ?></h2>
 				<ul>
 					<li>
-						<a href="<?php echo network_admin_url( 'plugin-install.php?tab=plugin-information&plugin=wplook-twitter-follow-button-new&TB_iframe=true&width=762&height=600'); ?>" class="thickbox"><?php _e('Twitter Follow Button', 'analytics-tracker'); ?></a> - <?php _e('Add the Twitter Follow Button to your blog to increase engagement and create a lasting connection with your audience.', 'analytics-tracker'); ?>
+						<a href="<?php echo network_admin_url( 'plugin-install.php?tab=plugin-information&plugin=wplook-twitter-follow-button-new&TB_iframe=true&width=762&height=600' ); ?>" class="thickbox"><?php _e( 'Twitter Follow Button', 'analytics-tracker' ); ?></a> - <?php _e( 'Add the Twitter Follow Button to your blog to increase engagement and create a lasting connection with your audience.', 'analytics-tracker' ); ?>
 					</li>
 					<li>
-						<a href="<?php echo network_admin_url( 'plugin-install.php?tab=plugin-information&plugin=auto-update&TB_iframe=true&width=762&height=600'); ?>" class="thickbox"><?php _e('Auto Update', 'analytics-tracker'); ?></a> - <?php _e('This plugin enable Auto Update for WordPress core, Themes and Plugins.', 'analytics-tracker'); ?>
+						<a href="<?php echo network_admin_url( 'plugin-install.php?tab=plugin-information&plugin=auto-update&TB_iframe=true&width=762&height=600' ); ?>" class="thickbox"><?php _e( 'Auto Update', 'analytics-tracker'); ?></a> - <?php _e( 'This plugin enable Auto Update for WordPress core, Themes and Plugins.', 'analytics-tracker' ); ?>
 					</li>
 					<li>
-						<a href="https://wplook.com/product/plugins/comingsoon-maintenance-mode-wordpress-plugin/?ref=104&campaign=AnalyticsTracker" target="_blank"><?php _e('ComingSoon', 'analytics-tracker'); ?></a> - <?php _e('ComingSoon is a Premium Maintenance Mode Plugin designed specifically for Editors, Designers or Developers who want to let visitors know the blog is down for Maintenance or Under Construction.', 'analytics-tracker') ?>
+						<a href="https://wplook.com/product/plugins/comingsoon-maintenance-mode-wordpress-plugin/?ref=104&campaign=AnalyticsTracker" target="_blank"><?php _e( 'ComingSoon', 'analytics-tracker'); ?></a> - <?php _e('ComingSoon is a Premium Maintenance Mode Plugin designed specifically for Editors, Designers or Developers who want to let visitors know the blog is down for Maintenance or Under Construction.', 'analytics-tracker' ) ?>
 					</li>
 				</ul>
 			</div>
@@ -207,18 +176,24 @@ class AnalyticsTracker {
 				<h2><?php _e( 'WordPress Themes', 'analytics-tracker' ); ?></h2>
 				<ul>
 					<li>
-						<a href="<?php echo network_admin_url( 'theme-install.php?theme=blogolife'); ?>"><?php _e('BlogoLife', 'analytics-tracker'); ?></a> - <?php _e('BlogoLife is a simple and perfect WordPress theme for personal blogging that supports post formats, and several customization options.', 'analytics-tracker'); ?>
+						<a href="<?php echo network_admin_url( 'theme-install.php?theme=blogolife'); ?>"><?php _e( 'BlogoLife', 'analytics-tracker' ); ?></a> - <?php _e( 'BlogoLife is a simple and perfect WordPress theme for personal blogging that supports post formats, and several customization options.', 'analytics-tracker' ); ?>
 					</li>
 					<li>
-						<a href="<?php echo network_admin_url( 'theme-install.php?theme=dailypost'); ?>"><?php _e('DailyPost', 'analytics-tracker'); ?></a> - <?php _e('DailyPost is intresting theme ideal for your everyday notes and thoughts, which supports post formats and several customisation options. The theme is a special one because of it\'s responsive design, thus you will get the pleasure to read the post with your mobile device.', 'analytics-tracker'); ?>
+						<a href="<?php echo esc_url( 'https://themeforest.net/item/avada-responsive-multipurpose-theme/2833226?ref=stylishwp' ); ?>" target="_blank"><?php _e( 'Avada', 'analytics-tracker' ); ?></a> - <?php _e( 'the #1 selling WordPress theme on the market. Simply put, it is the most versatile, easy to use multi-purpose WordPress theme. Avada is all about building unique, creative and professional websites through industry leading options network without having to touch a line of code. ', 'analytics-tracker' ); ?>
 					</li>
 					<li>
-						<a href="<?php echo esc_url( 'http://themeforest.net/item/campevent-conference-event-wordpress-theme/11439450?ref=stylishwp' ); ?>" target="_blank"><?php _e('CampEvent', 'analytics-tracker'); ?></a> - <?php _e('CampEvent is a WordPress theme that allow to easily configure event, exhibitions, conventions, trade shows, seminars, workshops, meetup by adding detailed information about speakers, sponsors, schedule and much more.', 'analytics-tracker'); ?>
+						<a href="<?php echo esc_url( 'https://themeforest.net/item/the7-responsive-multipurpose-wordpress-theme/5556590?ref=stylishwp' ); ?>" target="_blank"><?php _e( 'The7', 'analytics-tracker' ); ?></a> - <?php _e( 'Its 750+ Theme Options allows to craft almost any imaginable design. And Design Wizard feature lets you create a boutique-grade website design in mere minutes.', 'analytics-tracker' ); ?>
+					</li>
+					<li>
+						<a href="<?php echo esc_url( 'https://themeforest.net/item/betheme-responsive-multipurpose-wordpress-theme/7758048?ref=stylishwp' ); ?>" target="_blank"><?php _e( 'BeTheme', 'analytics-tracker' ); ?></a> - <?php _e( 'This is more than just WordPress theme. Such advanced options panel and Drag&Drop builder tool give unlimited possibilities.', 'analytics-tracker' ); ?>
+					</li>
+					<li>
+						<a href="<?php echo esc_url( 'https://themeforest.net/item/enfold-responsive-multipurpose-theme/4519990?ref=stylishwp' ); ?>" target="_blank"><?php _e( 'Enfold', 'analytics-tracker' ); ?></a> - <?php _e( 'Enfold is a clean, super flexible and fully responsive WordPress Theme (try resizing your browser), suited for business websites, shop websites, and users who want to showcase their work on a neat portfolio site.', 'analytics-tracker' ); ?>
 					</li>
 				</ul>
 			</div>
 			<div class='card pressthis'>
-				<h2><a target="_blank" title="<?php _e('Daily Beautiful WordPress Templates for your business', 'analytics-tracker'); ?>" href="https://dailydesigncafe.com/?utm_source=DailyDesign&utm_medium=Recommendations&utm_campaign=AnalyticsTracker"><?php _e( 'Daily Design Cafe', 'analytics-tracker' ); ?> ☕</a></h2>
+				<h2><a target="_blank" title="<?php _e( 'Daily Beautiful WordPress Templates for your business', 'analytics-tracker' ); ?>" href="https://dailydesigncafe.com/?utm_source=DailyDesign&utm_medium=Recommendations&utm_campaign=AnalyticsTracker"><?php _e( 'Daily Design Cafe', 'analytics-tracker' ); ?> ☕</a></h2>
 				<div class="dailydesign_container"></div>
 			</div>
 		</div>
@@ -257,23 +232,6 @@ class AnalyticsTracker {
 								'value' => 'analyticstracker_ga',
 								'label_for' => '',
 								'description' => __( 'Add Google Analytics tracking ID (UA-XXXXXXX-YY). Where can I find <a href="https://support.google.com/analytics/answer/1032385?rd=1" target="_blank">my tracking ID?</a>', 'analytics-tracker' ),
-				)
-			),
-			array (
-				'settings_type' => 'field',
-				'id' => 'analyticstracker_forcessl',
-				'title' => __( 'Force SSL', 'analytics-tracker' ),
-				'callback' => 'analyticstracker_settings_field_render',
-				'page' => 'analyticstracker_page',
-				'section' => 'analyticstracker_section_settings_general',
-				'args' => 	array (
-									'id' => 'analyticstracker_forcessl',
-									'type' => 'checkbox',
-									'class' => '',
-									'name' => 'analyticstracker_forcessl',
-									'value' => 1,
-									'label_for' => '',
-									'description' => __( 'Setting forceSSL to true will force http pages to also send all beacons using https.', 'analytics-tracker' ),
 				)
 			),
 			array (
@@ -505,83 +463,300 @@ class AnalyticsTracker {
 	 * @since 1.0.2
 	 * @access public
 	 */
-	public function analyticstracker_ga_get () {
-		$saved_options = get_option( 'analyticstracker_settings' );
-		if ( preg_match("/UA-[0-9]{3,9}-[0-9]{1,4}/", $saved_options['analyticstracker_ga']) ) {
-			echo "ga('create', '".$saved_options['analyticstracker_ga']."', 'auto');\r\n";
-		}
-	}
+	public function analyticstracker_ga_get() {
+		$saved_options 					= get_option( 'analyticstracker_settings' );
+		$analyticstracker_gtag_general 	= $analyticstracker_gtag_events = '';
 
+		if ( preg_match( "/UA-[0-9]{3,9}-[0-9]{1,4}/", $saved_options['analyticstracker_ga'] ) ) {
+			global $post;
 
-	/**
-	 * Get Force SSL
-	 *
-	 * @since 1.0.2
-	 * @access public
-	 */
-	public function analyticstracker_ga_forcessl_get () {
-		$saved_options = get_option( 'analyticstracker_settings' );
-		if ( isset($saved_options['analyticstracker_forcessl']) && $saved_options['analyticstracker_forcessl'] != '' ) {
-			echo "ga('set', 'forceSSL', true);\r\n";
-		}
-	}
+			/**
+			 * User Identification
+			 *
+			 * @since 2.0.0
+			 */
+			if ( is_user_logged_in() ) {
 
+				$current_user = wp_get_current_user();
 
-	/**
-	 * Get User ID
-	 *
-	 * @since 1.0.2
-	 * @access public
-	 */
-	public function analyticstracker_ga_userid_get () {
-		if ( is_user_logged_in() ) {
-			$current_user = wp_get_current_user();
-			$saved_options = get_option( 'analyticstracker_settings' );
-			if ( isset($saved_options['analyticstracker_userid']) && $saved_options['analyticstracker_userid'] != '' ) {
-				echo "ga('set', 'userId', '".$current_user->ID."');\r\n";
+				if ( isset( $saved_options['analyticstracker_userid'] ) && $saved_options['analyticstracker_userid'] != '' ) {
+					$analyticstracker_gtag_general['user_id'] = $current_user->ID;
+				}
 			}
+
+			/**
+			 * IP anonymization
+			 *
+			 * @since 2.0.0
+			 */
+			if ( isset( $saved_options['analyticstracker_anonymizeip'] ) && $saved_options['analyticstracker_anonymizeip'] != '' ) {
+				$analyticstracker_gtag_general['anonymize_ip'] = true;
+			}
+
+			/**
+			 * Display Features
+			 *
+			 * @since 2.0.0
+			 */
+			if ( ! isset( $saved_options['analyticstracker_displayfeatures'] ) ) {
+				$analyticstracker_gtag_general['allow_display_features'] = false;
+			}
+
+			/**
+			 * Enhanced Link Attribution
+			 *
+			 * @since 2.0.0
+			 */
+			if ( isset( $saved_options['analyticstracker_enhancedlinkatt'] ) && $saved_options['analyticstracker_enhancedlinkatt'] != '' ) {
+				$analyticstracker_gtag_general['link_attribution'] = true;
+			}
+
+
+			if ( isset( $saved_options['analyticstracker_events'] ) && $saved_options['analyticstracker_events'] != '' ) {
+
+				/**
+				 * Search Event
+				 *
+				 * @since 2.0.0
+				 */
+				if ( is_search() ) {
+					$analyticstracker_gtag_events[] = array(
+						'event',
+						'keyword',
+						array(
+							'event_category' => 'Search',
+							'event_label' => get_search_query( true ),
+						),
+					);
+				}
+
+
+				if ( is_singular() ) {
+
+
+					/**
+					 * Comments Event
+					 *
+					 * @since 2.0.0
+					 */
+					$args = array(
+						'meta_key' 	=> 'analyticstracker_comment_event',
+						'post_id' 	=> $post->ID,
+					);
+					$at_comments = get_comments($args);
+					foreach( $at_comments as $at_comment ){
+						$analyticstracker_gtag_events[] = array(
+							'event',
+							$at_comment->comment_author,
+							array(
+								'event_category'	=> 'Comments',
+								'event_label' 		=> 'Post ID: '.$at_comment->comment_post_ID.' | Comment ID: '.$at_comment->comment_ID,
+							),
+						);
+						delete_comment_meta( $at_comment->comment_ID, 'analyticstracker_comment_event' );
+					}
+
+					/**
+					 * Custom Dimension
+					 *
+					 * @since 2.0.0
+					 */
+					if ( isset( $saved_options['analyticstracker_custom_dimension'] ) && $saved_options['analyticstracker_custom_dimension'] != '' ) {
+
+						/**
+						 * Custom Dimension for tags
+						 *
+						 * @since 2.0.0
+						 */
+						if ( isset( $saved_options['analyticstracker_cu_tags'] ) && $saved_options['analyticstracker_cu_tags'] != '' ) {
+
+							if ( (int)$saved_options['analyticstracker_cu_tags'] AND  ( $saved_options['analyticstracker_cu_tags'] > 0 && $saved_options['analyticstracker_cu_tags'] < 201 ) ) {
+
+								$at_post_tags = get_the_tags();
+
+								if ($at_post_tags) {
+									foreach($at_post_tags as $tag) {
+										$at_post_tags_array[] = $tag->name;
+									}
+									$at_post_tags_cu = implode( '|', $at_post_tags_array );
+								} else {
+									$at_post_tags_cu = __( 'No Tags', 'analytics-tracker' );
+								}
+
+								$analyticstracker_gtag_general['custom_map']['dimension'.$saved_options['analyticstracker_cu_tags']] = 'analyticstracker_cu_tags';
+
+								$analyticstracker_gtag_events[] = array(
+									'event',
+									'atracker_gtag',
+									array(
+										'analyticstracker_cu_tags' => $at_post_tags_cu,
+										'non_interaction' => true,
+									),
+								);
+							}
+						}
+
+						/**
+						 * Custom Dimension for category
+						 *
+						 * @since 2.0.0
+						 */
+						if ( isset( $saved_options['analyticstracker_cu_category'] ) && $saved_options['analyticstracker_cu_category'] != '' ) {
+
+							if ( (int)$saved_options['analyticstracker_cu_category'] AND  ( $saved_options['analyticstracker_cu_category'] > 0 && $saved_options['analyticstracker_cu_category'] < 201 ) ) {
+
+								$at_post_categories = get_the_category();
+								if ( $at_post_categories ) {
+
+									foreach($at_post_categories as $category) {
+										$at_post_categories_array[] = $category->name;
+									}
+									$at_post_categories_cu = implode( '|', $at_post_categories_array );
+								} else {
+									$at_post_categories_cu = __( 'No Category', 'analytics-tracker' );
+								}
+
+								$analyticstracker_gtag_general['custom_map']['dimension'.$saved_options['analyticstracker_cu_category']] = 'analyticstracker_cu_category';
+
+								$analyticstracker_gtag_events[] = array(
+									'event',
+									'atracker_gtag',
+									array(
+										'analyticstracker_cu_category' => $at_post_categories_cu,
+										'non_interaction' => true,
+									),
+								);
+							}
+						}
+
+						/**
+						 * Custom Dimension for archive
+						 *
+						 * @since 2.0.0
+						 */
+						if ( isset( $saved_options['analyticstracker_cu_archive'] ) && $saved_options['analyticstracker_cu_archive'] != '' ) {
+
+							if ( (int)$saved_options['analyticstracker_cu_archive'] AND  ( $saved_options['analyticstracker_cu_archive'] > 0 && $saved_options['analyticstracker_cu_archive'] < 201 ) ) {
+
+								$analyticstracker_gtag_general['custom_map']['dimension'.$saved_options['analyticstracker_cu_archive']] = 'analyticstracker_cu_archive';
+
+								$analyticstracker_gtag_events[] = array(
+									'event',
+									'atracker_gtag',
+									array(
+										'analyticstracker_cu_archive' => get_the_date('Y|m|N|A'),
+										'non_interaction' => true,
+									),
+								);
+							}
+						}
+
+						/**
+						 * Custom Dimension for author
+						 *
+						 * @since 2.0.0
+						 */
+						if ( isset( $saved_options['analyticstracker_cu_author'] ) && $saved_options['analyticstracker_cu_author'] != '' ) {
+
+							if ( (int)$saved_options['analyticstracker_cu_author'] AND  ( $saved_options['analyticstracker_cu_author'] > 0 && $saved_options['analyticstracker_cu_author'] < 201 ) ) {
+
+								$analyticstracker_gtag_general['custom_map']['dimension'.$saved_options['analyticstracker_cu_author']] = 'analyticstracker_cu_author';
+
+								$analyticstracker_gtag_events[] = array(
+									'event',
+									'atracker_gtag',
+									array(
+										'analyticstracker_cu_author' => get_the_author_meta( 'display_name', $post->post_author ),
+										'non_interaction' => true,
+									),
+								);
+							}
+						}
+
+						/**
+						 * Custom Dimension for Post Format
+						 *
+						 * @since 2.0.0
+						 */
+						if ( isset( $saved_options['analyticstracker_cu_post_format'] ) && $saved_options['analyticstracker_cu_post_format'] != '' ) {
+
+							if ( (int)$saved_options['analyticstracker_cu_post_format'] AND  ( $saved_options['analyticstracker_cu_post_format'] > 0 && $saved_options['analyticstracker_cu_post_format'] < 201 ) ) {
+
+								$postformat = get_post_format() ? : 'standard';
+
+								$analyticstracker_gtag_general['custom_map']['dimension'.$saved_options['analyticstracker_cu_post_format']] = 'analyticstracker_cu_post_format';
+
+								$analyticstracker_gtag_events[] = array(
+									'event',
+									'atracker_gtag',
+									array(
+										'analyticstracker_cu_post_format' => $postformat,
+										'non_interaction' => true,
+									),
+								);
+							}
+						}
+
+						/**
+						 * Custom Dimension for Post Type
+						 *
+						 * @since 2.0.0
+						 */
+						if ( isset( $saved_options['analyticstracker_cu_post_type'] ) && $saved_options['analyticstracker_cu_post_type'] != '' ) {
+
+							if ( (int)$saved_options['analyticstracker_cu_post_type'] AND  ( $saved_options['analyticstracker_cu_post_type'] > 0 && $saved_options['analyticstracker_cu_post_type'] < 201 ) ) {
+
+								$analyticstracker_gtag_general['custom_map']['dimension'.$saved_options['analyticstracker_cu_post_type']] = 'analyticstracker_cu_post_type';
+								$analyticstracker_gtag_events[] = array(
+									'event',
+									'atracker_gtag',
+									array(
+										'analyticstracker_cu_post_type' => $post->post_type,
+										'non_interaction' => true,
+									),
+								);
+							}
+						}
+					}
+				}
+			}
+
+			return $analyticstracker_gtag = array(
+				'general'	=> $analyticstracker_gtag_general,
+				'events'	=> $analyticstracker_gtag_events,
+			);
 		}
 	}
 
-	/**
-	 * Get Anonymize IP
-	 *
-	 * @since 1.0.2
-	 * @access public
-	 */
-	public function analyticstracker_ga_anonymizeip_get () {
-		$saved_options = get_option( 'analyticstracker_settings' );
-		if ( isset($saved_options['analyticstracker_anonymizeip']) && $saved_options['analyticstracker_anonymizeip'] != '' ) {
-			echo "ga('set', 'anonymizeIp', true);\r\n";
-		}
-	}
-
 
 	/**
-	 * Get Display Features
+	 * Insert Google Analytics code
 	 *
-	 * @since 1.0.2
+	 * @since 1.0.0
 	 * @access public
 	 */
-	public function analyticstracker_ga_displayfeatures_get () {
-		$saved_options = get_option( 'analyticstracker_settings' );
-		if ( isset($saved_options['analyticstracker_displayfeatures']) && $saved_options['analyticstracker_displayfeatures'] != '' ) {
-			echo "ga('require', 'displayfeatures');\r\n";
-		}
-	}
+	public function analyticstracker_ga_script() {
+		$saved_options 				= get_option( 'analyticstracker_settings' );
+		$analyticstracker 			= $this->analyticstracker_ga_get();
+		$analyticstracker_config 	= ", ".str_replace( array( '[', ']' ), '', htmlspecialchars( wp_json_encode( $analyticstracker['general'] ), ENT_NOQUOTES ) );
+		$analyticstracker_events 	= '';
+		if ( ! empty( $analyticstracker['events'] ) ) {
+			foreach ( $analyticstracker['events'] as $key => $value) {
+				$analyticstracker_events .= "gtag(".str_replace( array( '[', ']' ), '', htmlspecialchars( wp_json_encode( $value ), ENT_NOQUOTES) ).");\r\n";
+			}
+		};
 
+		if( preg_match("/UA-[0-9]{3,9}-[0-9]{1,4}/", $saved_options['analyticstracker_ga']) ) { ?>
+<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $saved_options['analyticstracker_ga']; ?>"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "<?php echo esc_js( $saved_options["analyticstracker_ga"] ) ?>"<?php echo( $analyticstracker_config ); ?>);
+  <?php if ( $analyticstracker_events != '' ){ echo $analyticstracker_events; } ?>
+</script>
 
-	/**
-	 * Get Enhanced Link Attribution
-	 *
-	 * @since 1.0.3
-	 * @access public
-	 */
-	public function analyticstracker_ga_enhancedlinkatt_get () {
-		$saved_options = get_option( 'analyticstracker_settings' );
-		if ( isset($saved_options['analyticstracker_enhancedlinkatt']) && $saved_options['analyticstracker_enhancedlinkatt'] != '' ) {
-			echo "ga('require', 'linkid');\r\n";
-		}
+	<?php }
 	}
 
 
@@ -609,37 +784,8 @@ class AnalyticsTracker {
 		if ( 'google-analytics_page_analyticstracker-other-plugins' == $hook ) {
 			wp_enqueue_script( 'analyticstracker-js-admin', plugins_url( '/javascripts/analyticstracker-admin.js' , __FILE__ ), array( 'jquery' ) );
 
-			wp_register_style( 'analyticstracker-css-admin', plugins_url( '/analytics-tracker/css/analyticstracker-admin.css', false, '1.0.0' ) );
+			wp_register_style( 'analyticstracker-css-admin', plugins_url( '/analytics-tracker/css/analyticstracker-admin.css', false, '2.0.0' ) );
 			wp_enqueue_style( 'analyticstracker-css-admin' );
-		}
-	}
-
-
-	/**
-	 * Get Search and Add a comment Events
-	 *
-	 * @since 1.0.3
-	 * @access  public
-	 */
-	public function analyticstracker_ga_events_get() {
-		$saved_options = get_option( 'analyticstracker_settings' );
-		if ( isset($saved_options['analyticstracker_events']) && $saved_options['analyticstracker_events'] != '' ) {
-			if (  is_search() ) {
-				echo "ga('send', 'event', 'Search', '".get_search_query( true )."');\r\n";
-			}
-		}
-		//Add a comment Event
-		if ( is_singular() ) {
-			global $post;
-			$args = array(
-				'meta_key' => 'analyticstracker_comment_event',
-				'post_id' => $post->ID,
-			);
-			$at_comments = get_comments($args);
-			foreach($at_comments as $at_comment){
-				echo "ga('send', 'event', 'Comments', '".$at_comment->comment_author."', 'Post ID: ".$at_comment->comment_post_ID."', '".$at_comment->comment_ID."');\r\n";
-				delete_comment_meta( $at_comment->comment_ID, 'analyticstracker_comment_event');
-			}
 		}
 	}
 
@@ -658,89 +804,13 @@ class AnalyticsTracker {
 
 
 	/**
-	 * Get Custom Dimension
-	 *
-	 * @since 1.0.2
-	 * @access public
-	 */
-	public function analyticstracker_ga_custom_dimension_get () {
-		$saved_options = get_option( 'analyticstracker_settings' );
-		if ( is_singular() ) {
-			global $post;
-			if ( isset($saved_options['analyticstracker_custom_dimension']) && $saved_options['analyticstracker_custom_dimension'] != '' ) {
-				//Tags
-				if (isset($saved_options['analyticstracker_cu_tags']) && $saved_options['analyticstracker_cu_tags'] != '' ) {
-					if ( (int) $saved_options['analyticstracker_cu_tags'] AND  ( $saved_options['analyticstracker_cu_tags'] > 0 && $saved_options['analyticstracker_cu_tags'] < 201 ) ) {
-						$at_post_tags = get_the_tags();
-
-						if ($at_post_tags) {
-							foreach($at_post_tags as $tag) {
-								$at_post_tags_array[] = $tag->name;
-							}
-							$at_post_tags_cu = implode( '|', $at_post_tags_array );
-						} else {
-							$at_post_tags_cu = __('No Tags', 'analytics-tracker');
-						}
-						echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_tags']."', '".$at_post_tags_cu."');\r\n";
-					}
-				}
-
-				//Category
-				if (isset($saved_options['analyticstracker_cu_category']) && $saved_options['analyticstracker_cu_category'] != '' ) {
-					if ( (int) $saved_options['analyticstracker_cu_category'] AND  ( $saved_options['analyticstracker_cu_category'] > 0 && $saved_options['analyticstracker_cu_category'] < 201 ) ) {
-						$at_post_categories = get_the_category();
-						if ($at_post_categories) {
-							foreach($at_post_categories as $category) {
-								$at_post_categories_array[] = $category->name;
-							}
-							$at_post_categories_cu = implode( '|', $at_post_categories_array );
-							echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_category']."', '".$at_post_categories_cu."');\r\n";
-						}else {
-							$at_post_tags_cu = __('No Category', 'analytics-tracker');
-						}
-					}
-				}
-
-				//Archive
-				if (isset($saved_options['analyticstracker_cu_archive']) && $saved_options['analyticstracker_cu_archive'] != '' ) {
-					if ( (int) $saved_options['analyticstracker_cu_archive'] AND  ( $saved_options['analyticstracker_cu_archive'] > 0 && $saved_options['analyticstracker_cu_archive'] < 201 ) ) {
-						echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_archive']."', '".get_the_date('Y|m|N|A')."');\r\n";
-					}
-				}
-
-				//Author
-				if (isset($saved_options['analyticstracker_cu_author']) && $saved_options['analyticstracker_cu_author'] != '' ) {
-					if ( (int) $saved_options['analyticstracker_cu_author'] AND  ( $saved_options['analyticstracker_cu_author'] > 0 && $saved_options['analyticstracker_cu_author'] < 201 ) ) {
-						echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_author']."', '".get_the_author_meta( 'display_name', $post->post_author )."');\r\n";
-					}
-				}
-
-				//Post Format
-				if (isset($saved_options['analyticstracker_cu_post_format']) && $saved_options['analyticstracker_cu_post_format'] != '' ) {
-					if ( (int) $saved_options['analyticstracker_cu_post_format'] AND  ( $saved_options['analyticstracker_cu_post_format'] > 0 && $saved_options['analyticstracker_cu_post_format'] < 201 ) ) {
-						$postformat = get_post_format() ? : 'standard';
-						echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_post_format']."', '".$postformat."');\r\n";
-					}
-				}
-
-				//Post Type
-				if (isset($saved_options['analyticstracker_cu_post_type']) && $saved_options['analyticstracker_cu_post_type'] != '' ) {
-					if ( (int) $saved_options['analyticstracker_cu_post_type'] AND  ( $saved_options['analyticstracker_cu_post_type'] > 0 && $saved_options['analyticstracker_cu_post_type'] < 201 ) ) {
-						echo "ga('set', 'dimension".$saved_options['analyticstracker_cu_post_type']."', '".$post->post_type."');\r\n";
-					}
-				}
-			}
-		}
-	}
-
-
-	/**
 	 * Description Section callback
 	 *
 	 * @since 1.0.0
 	 * @access public
 	 */
 	public function analyticstracker_description_section_callback( ) {	}
+
 
 	/**
 	 * Description Section callback for Custom Dimension
@@ -749,8 +819,9 @@ class AnalyticsTracker {
 	 * @access public
 	 */
 	public function analyticstracker_description_section_cd_callback( ) {
-		_e('Each custom dimension has an associated index. There is a maximum of 20 custom dimensions (200 for Premium accounts). The index suffix must be a positive integer greater than 0. How to <a href="https://support.google.com/analytics/answer/2709829?hl=en#set_up_custom_dimensions" target="_blank">set up</a> custom dimensions', 'analytics-tracker' );
+		_e( 'Each custom dimension has an associated index. There is a maximum of 20 custom dimensions (200 for Premium accounts). The index suffix must be a positive integer greater than 0. How to <a href="https://support.google.com/analytics/answer/2709829?hl=en#set_up_custom_dimensions" target="_blank">set up</a> custom dimensions', 'analytics-tracker' );
 	}
+
 
 	/*
 	 * Setting Initialization
@@ -804,7 +875,7 @@ class AnalyticsTracker {
 		);
 
 		if ( isset( $options['id'] ) ) {
-			if ( isset( $saved_options[$options['id']] ) AND  ( $saved_options[$options['id']] != '') )  {
+			if ( isset( $saved_options[$options['id']] ) AND ( $saved_options[$options['id']] != '') )  {
 				$val = $saved_options[$options['id']];
 			} else {
 				$val = ( array_key_exists( 'default', $options ) ? $options['default'] : '' );
@@ -823,7 +894,6 @@ class AnalyticsTracker {
 		 * Input type Checkbox
 		 */
 		if ($atts['type'] == 'checkbox') {
-			//var_dump( $atts);
 			$html = sprintf( '<input type="%1$s" class="%2$s" id="%3$s" name="%4$s" value="%5$s" %6$s />', $atts['type'], $atts['class'], $atts['id'], $atts['name'], $atts['value'], ( isset( $atts['checked'] ) ? "checked=".$atts['checked'] : '') );
 			if ( array_key_exists( 'description', $atts ) ){
 				$html .= sprintf( '<p class="description">%1$s</p>', $atts['description'] );

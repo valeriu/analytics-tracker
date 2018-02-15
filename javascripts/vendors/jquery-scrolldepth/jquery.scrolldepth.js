@@ -1,6 +1,6 @@
 /*!
  * @preserve
- * jquery.scrolldepth.js | v0.9.1
+ * jquery.scrolldepth.js | v0.9.1m
  * Copyright (c) 2016 Rob Flaherty (@robflaherty)
  * Licensed under the MIT and GPL licenses.
  */
@@ -42,6 +42,7 @@
       universalGA,
       classicGA,
       gaGlobal,
+      gtagGlobalSiteTag,
       standardEventHandler;
 
     /*
@@ -67,6 +68,9 @@
       if (options.gaGlobal) {
         universalGA = true;
         gaGlobal = options.gaGlobal;
+      } else if (typeof gtag === "function") {
+        gtagGlobalSiteTag = true;
+        gaGlobal = 'gtag';
       } else if (typeof ga === "function") {
         universalGA = true;
         gaGlobal = 'ga';
@@ -94,7 +98,7 @@
 
       function sendEvent(action, label, scrollDistance, timing) {
 
-        if (standardEventHandler) {
+        if (standardEventHandler && !gtagGlobalSiteTag ) {
 
           standardEventHandler({'event': 'ScrollDistance', 'eventCategory': 'Scroll Depth', 'eventAction': action, 'eventLabel': label, 'eventValue': 1, 'eventNonInteraction': options.nonInteraction});
 
@@ -122,6 +126,32 @@
               window[gaGlobal]('send', 'timing', 'Scroll Depth', action, timing, label);
             }
 
+          } else {
+          if ( gtagGlobalSiteTag ) {
+            window[gaGlobal]('event', action, {
+              'event_category' : 'Scroll Depth',
+              'event_label' : label,
+              'non_interaction': options.nonInteraction,
+            });
+
+            if (options.pixelDepth && arguments.length > 2 && scrollDistance > lastPixelDepth) {
+              lastPixelDepth = scrollDistance;
+              window[gaGlobal]('event', 'Scroll Depth', {
+                'event_category' : 'Pixel Depth',
+                'event_label' : rounded(scrollDistance),
+                'non_interaction': options.nonInteraction,
+              });
+            }
+
+            if (options.userTiming && arguments.length > 3) {
+              window[gaGlobal]('event', timing, {
+                'event_category' : 'Pixel Depth',
+                'event_label' : label,
+                'non_interaction': options.nonInteraction,
+              });
+            }
+
+          }
           }
 
           if (classicGA) {
