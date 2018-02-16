@@ -1,12 +1,12 @@
 === Analytics Tracker ===
 Plugin Name: Analytics Tracker
 Plugin URI: https://stylishwp.com/product/wordpress-plugins/google-analytics-tracker/
-Description: Analytics Tracker makes it super easy to add Google Analytics tracking code on your site
+Description: Analytics Tracker makes it super easy to add Google Analytics (gtag.js) tracking code on your site
 Contributors: valeriutihai
 Author: Valeriu Tihai
 Author URI: http://valeriu.tihai.ca
 Text Domain: analytics-tracker
-Tags: Google Analytics, Analytics Tracker, Tracking Code, UA Code, Universal Analytics, Visits statistics, Web Stats, WordPress Google Analytics
+Tags: Google Analytics, Analytics Tracker, Tracking Code, UA Code, Global Site Tag, gtag.js, Visits statistics, Web Stats, WordPress Google Analytics
 Donate link: https://paypal.me/valeriu/5
 Requires at least: 4.6
 Tested up to: 4.9.4
@@ -20,7 +20,7 @@ Analytics Tracker makes it super easy to add Google Analytics tracking code on y
 
 > If you like the plugin, feel free to [rate it](https://wordpress.org/support/view/plugin-reviews/analytics-tracker?rate=5#postform). Thank You!
 
-Analytics Tracker utilizes the latest and greatest features of Universal Google Analytics and makes it super easy to add tracking code on your blog.
+Analytics Tracker utilizes the latest and greatest features of Google global site tag (gtag.js) and makes it super easy to add tracking code on your blog.
 
 [youtube https://www.youtube.com/watch?v=emtS4LMBFI0]
 
