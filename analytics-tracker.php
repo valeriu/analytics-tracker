@@ -159,6 +159,20 @@ class AnalyticsTracker {
 		<div class="wrap">
 			<h2><?php _e( 'My Recommendations', 'analytics-tracker' ); ?></h2>
 			<div class='card pressthis'>
+				<h2><?php _e( 'WordPress Hosting', 'analytics-tracker' ); ?></h2>
+				<ul>
+					<li>
+
+						<a href="https://kinsta.com/plans/?kaid=NDINHGAQXILS" target="_blank"><?php _e( 'Kinsta Managed WordPress Hosting', 'analytics-tracker'); ?></a> - <?php _e('We have over 10 years of experience working with WordPress and we\'ve poured all that know-how into creating the best managed WordPress hosting solution available today.', 'analytics-tracker' ) ?>
+						<p>
+							<a href="https://kinsta.com/plans/?kaid=NDINHGAQXILS" target="_blank">
+								<img class="pressthis_img" src="https://i2.wp.com/valeriu.files.wordpress.com/2018/02/kinsta-dark.png" alt="<?php _e( 'Kinsta Managed WordPress Hosting', 'analytics-tracker'); ?>">
+							</a>
+						</p>
+					</li>
+				</ul>
+			</div>
+			<div class='card pressthis'>
 				<h2><?php _e( 'WordPress Plugins', 'analytics-tracker' ); ?></h2>
 				<ul>
 					<li>
