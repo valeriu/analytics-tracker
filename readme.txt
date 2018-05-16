@@ -90,7 +90,6 @@ You can translate Analytics Tracker on [translate.wordpress.org](https://transla
 * Use Global Site Tag (gtag.js)
 * Deleted Force SSL
 
-== Changelog ==
 = 1.1.1 =
 * Fixed XSS vulnerability on search event, thanks to Arjan Snaterse - https://www.uprise.nl
 

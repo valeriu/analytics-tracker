@@ -492,11 +492,11 @@ class AnalyticsTracker {
 			if ( is_user_logged_in() ) {
 
 				$current_user = wp_get_current_user();
-
 				if ( isset( $saved_options['analyticstracker_userid'] ) && $saved_options['analyticstracker_userid'] != '' ) {
-					$analyticstracker_gtag_general['user_id'] = $current_user->ID;
+					$analyticstracker_gtag_general = array( 'user_id' => $current_user->ID );
 				}
 			}
+var_dump($analyticstracker_gtag_general);
 
 			/**
 			 * IP anonymization
@@ -504,7 +504,7 @@ class AnalyticsTracker {
 			 * @since 2.0.0
 			 */
 			if ( isset( $saved_options['analyticstracker_anonymizeip'] ) && $saved_options['analyticstracker_anonymizeip'] != '' ) {
-				$analyticstracker_gtag_general['anonymize_ip'] = true;
+				$analyticstracker_gtag_general = array( 'anonymize_ip' => true );
 			}
 
 			/**
@@ -513,7 +513,7 @@ class AnalyticsTracker {
 			 * @since 2.0.0
 			 */
 			if ( ! isset( $saved_options['analyticstracker_displayfeatures'] ) ) {
-				$analyticstracker_gtag_general['allow_display_features'] = false;
+				$analyticstracker_gtag_general = array( 'allow_display_features' => false );
 			}
 
 			/**
@@ -599,7 +599,7 @@ class AnalyticsTracker {
 
 								$analyticstracker_gtag_general['custom_map']['dimension'.$saved_options['analyticstracker_cu_tags']] = 'analyticstracker_cu_tags';
 
-								$analyticstracker_gtag_events[] = array(
+								$analyticstracker_gtag_events = array(
 									'event',
 									'atracker_gtag',
 									array(
@@ -734,11 +734,15 @@ class AnalyticsTracker {
 					}
 				}
 			}
+var_dump($analyticstracker_gtag_general);
 
-			return $analyticstracker_gtag = array(
+			$analyticstracker_gtag = array(
 				'general'	=> $analyticstracker_gtag_general,
 				'events'	=> $analyticstracker_gtag_events,
 			);
+var_dump($analyticstracker_gtag);
+
+			return $analyticstracker_gtag;
 		}
 	}
 
