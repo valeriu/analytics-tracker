@@ -479,7 +479,7 @@ class AnalyticsTracker {
 	 */
 	public function analyticstracker_ga_get() {
 		$saved_options 					= get_option( 'analyticstracker_settings' );
-		$analyticstracker_gtag_general 	= $analyticstracker_gtag_events = '';
+		$analyticstracker_gtag_general 	= $analyticstracker_gtag_events = array();
 
 		if ( preg_match( "/UA-[0-9]{3,9}-[0-9]{1,4}/", $saved_options['analyticstracker_ga'] ) ) {
 			global $post;
@@ -522,7 +522,7 @@ var_dump($analyticstracker_gtag_general);
 			 * @since 2.0.0
 			 */
 			if ( isset( $saved_options['analyticstracker_enhancedlinkatt'] ) && $saved_options['analyticstracker_enhancedlinkatt'] != '' ) {
-				$analyticstracker_gtag_general['link_attribution'] = true;
+				$analyticstracker_gtag_general = array( 'link_attribution' => true );
 			}
 
 
