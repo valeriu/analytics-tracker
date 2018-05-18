@@ -7,10 +7,10 @@ Author: Valeriu Tihai
 Author URI: http://valeriu.tihai.ca
 Text Domain: analytics-tracker
 Tags: Google Analytics, Analytics Tracker, Tracking Code, UA Code, Global Site Tag, gtag.js, Visits statistics, Web Stats, WordPress Google Analytics
-Donate link: https://paypal.me/valeriu/5
+Donate link: https://paypal.me/valeriu/25
 Requires at least: 4.6
-Tested up to: 4.9.4
-Stable tag: 2.0.0
+Tested up to: 4.9.6
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,9 +47,10 @@ Google Analytics is now the most widely used web analytics service on the Intern
 In most cases you can install automatically from WordPress.org.
 
 However, if you install this manually, follow these steps:
-1. Create the directory \'auto-update\' in your \'/wp-content/plugins/\' directory
-2. Upload all the plugin\'s file to the newly created directory
-3. Activate the plugin through the \'Plugins\' menu in WordPress
+1. Upload the Analytics Tracker plugin to your site;
+2. Activate the plugin through the \'Plugins\' menu in WordPress;
+3. Then enter your Google Analytics tracking ID (UA-XXXXXXX-YY);
+You’re done!
 
 If you don't have an Google Analytics ID, you need to go to [Google Analytics](http://www.google.com/analytics), create an account and [get the code](https://support.google.com/analytics/answer/1032385?rd=1), similar to UA-XXXXXXX-YY
 
@@ -86,11 +87,13 @@ You can translate Analytics Tracker on [translate.wordpress.org](https://transla
 1. Google Analytics Settings
 
 == Changelog ==
+= 2.0.1 =
+* Added compatibility with PHP 7.2
+
 = 2.0.0 =
 * Use Global Site Tag (gtag.js)
 * Deleted Force SSL
 
-== Changelog ==
 = 1.1.1 =
 * Fixed XSS vulnerability on search event, thanks to Arjan Snaterse - https://www.uprise.nl
 
