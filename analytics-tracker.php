@@ -89,7 +89,7 @@ class AnalyticsTracker {
 	 */
 	public function analyticstracker_amp_analytics_code() {
 		$saved_options = get_option( 'analyticstracker_settings' );
-		if( preg_match("/UA-[0-9]{3,9}-[0-9]{1,4}/", $saved_options['analyticstracker_ga']) ) { ?>
+		if( preg_match("/UA-[0-9]{3,9}-[0-9]{1,4}/", $saved_options['analyticstracker_ga']) || preg_match("/G-[0-9a-zA-Z]{6,12}/", $saved_options['analyticstracker_ga'])  ) { ?>
 			<amp-analytics type="googleanalytics" id="googleanalytics1">
 				<script type="application/json">
 					{
@@ -481,7 +481,7 @@ class AnalyticsTracker {
 		$saved_options 					= get_option( 'analyticstracker_settings' );
 		$analyticstracker_gtag_general 	= $analyticstracker_gtag_events = array();
 
-		if ( preg_match( "/UA-[0-9]{3,9}-[0-9]{1,4}/", $saved_options['analyticstracker_ga'] ) ) {
+		if ( preg_match( "/UA-[0-9]{3,9}-[0-9]{1,4}/", $saved_options['analyticstracker_ga'] ) || preg_match("/G-[0-9a-zA-Z]{6,12}/", $saved_options['analyticstracker_ga']) ) {
 			global $post;
 
 			/**
@@ -760,7 +760,7 @@ class AnalyticsTracker {
 			}
 		};
 
-		if( preg_match("/UA-[0-9]{3,9}-[0-9]{1,4}/", $saved_options['analyticstracker_ga']) ) { ?>
+		if( preg_match("/UA-[0-9]{3,9}-[0-9]{1,4}/", $saved_options['analyticstracker_ga']) || preg_match("/G-[0-9a-zA-Z]{6,12}/", $saved_options['analyticstracker_ga'])  ) { ?>
 <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $saved_options['analyticstracker_ga']; ?>"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
