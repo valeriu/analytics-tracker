@@ -5,11 +5,11 @@
  * Description: Analytics Tracker makes it super easy to add Google Analytics tracking code on your site
  * Text Domain: analytics-tracker
  * Domain Path: /languages
- * Version: 2.0.0
+ * Version: 2.0.1
  * Author: Valeriu Tihai
  * Author URI: https://valeriu.tihai.ca
  * Contributors: valeriutihai
- * Donate link: https://paypal.me/valeriu/5
+ * Donate link: https://paypal.me/valeriu/25
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -89,7 +89,7 @@ class AnalyticsTracker {
 	 */
 	public function analyticstracker_amp_analytics_code() {
 		$saved_options = get_option( 'analyticstracker_settings' );
-		if(preg_match("/UA-[0-9]{3,9}-[0-9]{1,4}/", $saved_options['analyticstracker_ga']) ) { ?>
+		if( preg_match("/UA-[0-9]{3,9}-[0-9]{1,4}/", $saved_options['analyticstracker_ga']) || preg_match("/G-[0-9a-zA-Z]{6,12}/", $saved_options['analyticstracker_ga'])  ) { ?>
 			<amp-analytics type="googleanalytics" id="googleanalytics1">
 				<script type="application/json">
 					{
@@ -207,7 +207,7 @@ class AnalyticsTracker {
 				</ul>
 			</div>
 			<div class='card pressthis'>
-				<h2><a target="_blank" title="<?php _e( 'Daily Beautiful WordPress Templates for your business', 'analytics-tracker' ); ?>" href="https://dailydesigncafe.com/?utm_source=DailyDesign&utm_medium=Recommendations&utm_campaign=AnalyticsTracker"><?php _e( 'Daily Design Cafe', 'analytics-tracker' ); ?> ☕</a></h2>
+				<h2><a target="_blank" title="<?php _e( 'Daily Beautiful WordPress Templates for your business', 'analytics-tracker' ); ?>" href="https://dailydesigncafe.com/?utm_source=DailyDesign&utm_medium=Recommendations&utm_campaign=AnalyticsTracker">Daily Design Cafe ☕</a></h2>
 				<div class="dailydesign_container"></div>
 			</div>
 		</div>
@@ -226,110 +226,110 @@ class AnalyticsTracker {
 		return array(
 			array(
 				'settings_type' => 'section',
-				'id' => 'analyticstracker_section_settings_general',
-				'title' => 'General Settings',
-				'callback' => 'analyticstracker_description_section_callback',
-				'page' => 'analyticstracker_page'
+				'id'            => 'analyticstracker_section_settings_general',
+				'title'         => __( 'General Settings', 'analytics-tracker' ),
+				'callback'      => 'analyticstracker_description_section_callback',
+				'page'          => 'analyticstracker_page'
 			),
 			array (
 				'settings_type' => 'field',
-				'id' => 'analyticstracker_ga',
-				'title' => __( 'Google Analytics tracking ID', 'analytics-tracker' ),
-				'callback' => 'analyticstracker_settings_field_render',
-				'page' => 'analyticstracker_page',
-				'section' => 'analyticstracker_section_settings_general',
-				'args' => 	array (
-								'id' => 'analyticstracker_ga',
-								'type' => 'text',
-								'class' => '',
-								'name' => 'analyticstracker_ga',
-								'value' => 'analyticstracker_ga',
-								'label_for' => '',
-								'description' => __( 'Add Google Analytics tracking ID (UA-XXXXXXX-YY). Where can I find <a href="https://support.google.com/analytics/answer/1032385?rd=1" target="_blank">my tracking ID?</a>', 'analytics-tracker' ),
+				'id'            => 'analyticstracker_ga',
+				'title'         => __( 'Google Analytics tracking ID', 'analytics-tracker' ),
+				'callback'      => 'analyticstracker_settings_field_render',
+				'page'          => 'analyticstracker_page',
+				'section'       => 'analyticstracker_section_settings_general',
+				'args'          => 	array (
+									'id'          => 'analyticstracker_ga',
+									'type'        => 'text',
+									'class'       => '',
+									'name'        => 'analyticstracker_ga',
+									'value'       => 'analyticstracker_ga',
+									'label_for'   => '',
+									'description' => __( 'Add Google Analytics tracking ID (UA-XXXXXXX-YY). Where can I find <a href="https://support.google.com/analytics/answer/1032385?rd=1" target="_blank">my tracking ID?</a>', 'analytics-tracker' ),
 				)
 			),
 			array (
 				'settings_type' => 'field',
-				'id' => 'analyticstracker_userid',
-				'title' => __( 'User ID', 'analytics-tracker' ),
-				'callback' => 'analyticstracker_settings_field_render',
-				'page' => 'analyticstracker_page',
-				'section' => 'analyticstracker_section_settings_general',
-				'args' => 	array (
-									'id' => 'analyticstracker_userid',
-									'type' => 'checkbox',
-									'class' => '',
-									'name' => 'analyticstracker_userid',
-									'value' => 1,
-									'label_for' => '',
+				'id'            => 'analyticstracker_userid',
+				'title'         => __( 'User ID', 'analytics-tracker' ),
+				'callback'      => 'analyticstracker_settings_field_render',
+				'page'          => 'analyticstracker_page',
+				'section'       => 'analyticstracker_section_settings_general',
+				'args'          => 	array (
+									'id'          => 'analyticstracker_userid',
+									'type'        => 'checkbox',
+									'class'       => '',
+									'name'        => 'analyticstracker_userid',
+									'value'       => 1,
+									'label_for'   => '',
 									'description' => __( 'This is intended to be a known identifier for a user provided by the site owner/tracking library user.', 'analytics-tracker' ),
 				)
 			),
 			array (
 				'settings_type' => 'field',
-				'id' => 'analyticstracker_anonymizeip',
-				'title' => __( 'Anonymize IP', 'analytics-tracker' ),
-				'callback' => 'analyticstracker_settings_field_render',
-				'page' => 'analyticstracker_page',
-				'section' => 'analyticstracker_section_settings_general',
-				'args' => 	array (
-									'id' => 'analyticstracker_anonymizeip',
-									'type' => 'checkbox',
-									'class' => '',
-									'name' => 'analyticstracker_anonymizeip',
-									'value' => 1,
-									'label_for' => '',
+				'id'            => 'analyticstracker_anonymizeip',
+				'title'         => __( 'Anonymize IP', 'analytics-tracker' ),
+				'callback'      => 'analyticstracker_settings_field_render',
+				'page'          => 'analyticstracker_page',
+				'section'       => 'analyticstracker_section_settings_general',
+				'args'          => 	array (
+									'id'          => 'analyticstracker_anonymizeip',
+									'type'        => 'checkbox',
+									'class'       => '',
+									'name'        => 'analyticstracker_anonymizeip',
+									'value'       => 1,
+									'label_for'   => '',
 									'description' => __( 'The IP address of the sender will be anonymized', 'analytics-tracker' ),
 				)
 			),
 			array (
 				'settings_type' => 'field',
-				'id' => 'analyticstracker_displayfeatures',
-				'title' => __( 'Display Features', 'analytics-tracker' ),
-				'callback' => 'analyticstracker_settings_field_render',
-				'page' => 'analyticstracker_page',
-				'section' => 'analyticstracker_section_settings_general',
-				'args' => 	array (
-									'id' => 'analyticstracker_displayfeatures',
-									'type' => 'checkbox',
-									'class' => '',
-									'name' => 'analyticstracker_displayfeatures',
-									'value' => 1,
-									'label_for' => '',
+				'id'            => 'analyticstracker_displayfeatures',
+				'title'         => __( 'Display Features', 'analytics-tracker' ),
+				'callback'      => 'analyticstracker_settings_field_render',
+				'page'          => 'analyticstracker_page',
+				'section'       => 'analyticstracker_section_settings_general',
+				'args'          => 	array (
+									'id'          => 'analyticstracker_displayfeatures',
+									'type'        => 'checkbox',
+									'class'       => '',
+									'name'        => 'analyticstracker_displayfeatures',
+									'value'       => 1,
+									'label_for'   => '',
 									'description' => __( 'The plugin works by sending an additional request to stats.g.doubleclick.net that is used to provide advertising features like remarketing and demographics and interest reporting in Google Analytics.', 'analytics-tracker' ),
 				)
 			),
 			array (
 				'settings_type' => 'field',
-				'id' => 'analyticstracker_enhancedlinkatt',
-				'title' => __( 'Enhanced Link Attribution', 'analytics-tracker' ),
-				'callback' => 'analyticstracker_settings_field_render',
-				'page' => 'analyticstracker_page',
-				'section' => 'analyticstracker_section_settings_general',
-				'args' => 	array (
-									'id' => 'analyticstracker_enhancedlinkatt',
-									'type' => 'checkbox',
-									'class' => '',
-									'name' => 'analyticstracker_enhancedlinkatt',
-									'value' => 1,
-									'label_for' => '',
+				'id'            => 'analyticstracker_enhancedlinkatt',
+				'title'         => __( 'Enhanced Link Attribution', 'analytics-tracker' ),
+				'callback'      => 'analyticstracker_settings_field_render',
+				'page'          => 'analyticstracker_page',
+				'section'       => 'analyticstracker_section_settings_general',
+				'args'          => 	array (
+									'id'          => 'analyticstracker_enhancedlinkatt',
+									'type'        => 'checkbox',
+									'class'       => '',
+									'name'        => 'analyticstracker_enhancedlinkatt',
+									'value'       => 1,
+									'label_for'   => '',
 									'description' => __( 'Enhanced Link Attribution improves the accuracy of your In-Page Analytics report by automatically differentiating between multiple links to the same URL on a single page by using link element IDs.', 'analytics-tracker' ),
 				)
 			),
 			array (
 				'settings_type' => 'field',
-				'id' => 'analyticstracker_events',
-				'title' => __( 'Event Tracking', 'analytics-tracker' ),
-				'callback' => 'analyticstracker_settings_field_render',
-				'page' => 'analyticstracker_page',
-				'section' => 'analyticstracker_section_settings_general',
-				'args' => 	array (
-									'id' => 'analyticstracker_events',
-									'type' => 'checkbox',
-									'class' => '',
-									'name' => 'analyticstracker_events',
-									'value' => 1,
-									'label_for' => '',
+				'id'            => 'analyticstracker_events',
+				'title'         => __( 'Event Tracking', 'analytics-tracker' ),
+				'callback'      => 'analyticstracker_settings_field_render',
+				'page'          => 'analyticstracker_page',
+				'section'       => 'analyticstracker_section_settings_general',
+				'args'          => 	array (
+									'id'          => 'analyticstracker_events',
+									'type'        => 'checkbox',
+									'class'       => '',
+									'name'        => 'analyticstracker_events',
+									'value'       => 1,
+									'label_for'   => '',
 									'description' => __( 'Track events feature: Downloads, Emails, Phone numbers Error 404, Search and Outbound links, Add a comment, Scroll Depth', 'analytics-tracker' ),
 				)
 			),
@@ -337,134 +337,134 @@ class AnalyticsTracker {
 			//Custom Dimension
 			array(
 				'settings_type' => 'section',
-				'id' => 'analyticstracker_section_settings_custom_dimension',
-				'title' => 'Custom Dimension',
-				'callback' => 'analyticstracker_description_section_cd_callback',
-				'page' => 'analyticstracker_page'
+				'id'            => 'analyticstracker_section_settings_custom_dimension',
+				'title'         => __( 'Custom Dimension', 'analytics-tracker' ),
+				'callback'      => 'analyticstracker_description_section_cd_callback',
+				'page'          => 'analyticstracker_page'
 			),
 			array (
 				'settings_type' => 'field',
-				'id' => 'analyticstracker_custom_dimension',
-				'title' => __( 'Custom Dimension', 'analytics-tracker' ),
-				'callback' => 'analyticstracker_settings_field_render',
-				'page' => 'analyticstracker_page',
-				'section' => 'analyticstracker_section_settings_custom_dimension',
-				'args' => 	array (
-									'id' => 'analyticstracker_custom_dimension',
-									'type' => 'checkbox',
-									'class' => '',
-									'name' => 'analyticstracker_custom_dimension',
-									'value' => 1,
-									'label_for' => '',
+				'id'            => 'analyticstracker_custom_dimension',
+				'title'         => __( 'Custom Dimension', 'analytics-tracker' ),
+				'callback'      => 'analyticstracker_settings_field_render',
+				'page'          => 'analyticstracker_page',
+				'section'       => 'analyticstracker_section_settings_custom_dimension',
+				'args'          => array (
+									'id'          => 'analyticstracker_custom_dimension',
+									'type'        => 'checkbox',
+									'class'       => '',
+									'name'        => 'analyticstracker_custom_dimension',
+									'value'       => 1,
+									'label_for'   => '',
 									'description' => __( 'Enable Custom Dimension', 'analytics-tracker' ),
 				)
 			),
 			array (
 				'settings_type' => 'field',
-				'id' => 'analyticstracker_cu_tags',
-				'title' => __( 'Tags', 'analytics-tracker' ),
-				'callback' => 'analyticstracker_settings_field_render',
-				'page' => 'analyticstracker_page',
-				'section' => 'analyticstracker_section_settings_custom_dimension',
-				'args' => 	array (
-								'id' => 'analyticstracker_cu_tags',
-								'type' => 'text',
-								'class' => 'small-text',
-								'name' => 'analyticstracker_cu_tags',
-								'value' => '',
-								'default' => '1',
-								'label_for' => 'analyticstracker_cu_tags',
-								'description' => __( 'The index suffix for tags', 'analytics-tracker' ),
+				'id'            => 'analyticstracker_cu_tags',
+				'title'         => __( 'Tags', 'analytics-tracker' ),
+				'callback'      => 'analyticstracker_settings_field_render',
+				'page'          => 'analyticstracker_page',
+				'section'       => 'analyticstracker_section_settings_custom_dimension',
+				'args'          => array (
+									'id'          => 'analyticstracker_cu_tags',
+									'type'        => 'text',
+									'class'       => 'small-text',
+									'name'        => 'analyticstracker_cu_tags',
+									'value'       => '',
+									'default'     => '1',
+									'label_for'   => 'analyticstracker_cu_tags',
+									'description' => __( 'The index suffix for tags', 'analytics-tracker' ),
 				)
 			),
 			array (
 				'settings_type' => 'field',
-				'id' => 'analyticstracker_cu_category',
-				'title' => __( 'Category', 'analytics-tracker' ),
-				'callback' => 'analyticstracker_settings_field_render',
-				'page' => 'analyticstracker_page',
-				'section' => 'analyticstracker_section_settings_custom_dimension',
-				'args' => 	array (
-								'id' => 'analyticstracker_cu_category',
-								'type' => 'text',
-								'class' => 'small-text',
-								'name' => 'analyticstracker_cu_category',
-								'value' => '',
-								'default' => '2',
-								'label_for' => 'analyticstracker_cu_category',
-								'description' => __( 'The index suffix for category', 'analytics-tracker' ),
+				'id'            => 'analyticstracker_cu_category',
+				'title'         => __( 'Category', 'analytics-tracker' ),
+				'callback'      => 'analyticstracker_settings_field_render',
+				'page'          => 'analyticstracker_page',
+				'section'       => 'analyticstracker_section_settings_custom_dimension',
+				'args'          => 	array (
+									'id'         => 'analyticstracker_cu_category',
+									'type'        => 'text',
+									'class'       => 'small-text',
+									'name'        => 'analyticstracker_cu_category',
+									'value'       => '',
+									'default'     => '2',
+									'label_for'   => 'analyticstracker_cu_category',
+									'description' => __( 'The index suffix for category', 'analytics-tracker' ),
 				)
 			),
 			array (
 				'settings_type' => 'field',
-				'id' => 'analyticstracker_cu_archive',
-				'title' => __( 'Archive', 'analytics-tracker' ),
-				'callback' => 'analyticstracker_settings_field_render',
-				'page' => 'analyticstracker_page',
-				'section' => 'analyticstracker_section_settings_custom_dimension',
-				'args' => 	array (
-								'id' => 'analyticstracker_cu_archive',
-								'type' => 'text',
-								'class' => 'small-text',
-								'name' => 'analyticstracker_cu_archive',
-								'value' => '',
-								'default' => '3',
-								'label_for' => 'analyticstracker_cu_archive',
-								'description' => __( 'The index suffix for archive', 'analytics-tracker' ),
+				'id'            => 'analyticstracker_cu_archive',
+				'title'         => __( 'Archive', 'analytics-tracker' ),
+				'callback'      => 'analyticstracker_settings_field_render',
+				'page'          => 'analyticstracker_page',
+				'section'       => 'analyticstracker_section_settings_custom_dimension',
+				'args'          => array (
+									'id'         => 'analyticstracker_cu_archive',
+									'type'        => 'text',
+									'class'       => 'small-text',
+									'name'        => 'analyticstracker_cu_archive',
+									'value'       => '',
+									'default'     => '3',
+									'label_for'   => 'analyticstracker_cu_archive',
+									'description' => __( 'The index suffix for archive', 'analytics-tracker' ),
 				)
 			),
 			array (
 				'settings_type' => 'field',
-				'id' => 'analyticstracker_cu_author',
-				'title' => __( 'Author', 'analytics-tracker' ),
-				'callback' => 'analyticstracker_settings_field_render',
-				'page' => 'analyticstracker_page',
-				'section' => 'analyticstracker_section_settings_custom_dimension',
-				'args' => 	array (
-								'id' => 'analyticstracker_cu_author',
-								'type' => 'text',
-								'class' => 'small-text',
-								'name' => 'analyticstracker_cu_author',
-								'value' => '',
-								'default' => '4',
-								'label_for' => 'analyticstracker_cu_author',
-								'description' => __( 'The index suffix for author', 'analytics-tracker' ),
+				'id'            => 'analyticstracker_cu_author',
+				'title'         => __( 'Author', 'analytics-tracker' ),
+				'callback'      => 'analyticstracker_settings_field_render',
+				'page'          => 'analyticstracker_page',
+				'section'       => 'analyticstracker_section_settings_custom_dimension',
+				'args'          => 	array (
+									'id'          => 'analyticstracker_cu_author',
+									'type'        => 'text',
+									'class'       => 'small-text',
+									'name'        => 'analyticstracker_cu_author',
+									'value'       => '',
+									'default'     => '4',
+									'label_for'   => 'analyticstracker_cu_author',
+									'description' => __( 'The index suffix for author', 'analytics-tracker' ),
 				)
 			),
 			array (
 				'settings_type' => 'field',
-				'id' => 'analyticstracker_cu_post_format',
-				'title' => __( 'Post Format', 'analytics-tracker' ),
-				'callback' => 'analyticstracker_settings_field_render',
-				'page' => 'analyticstracker_page',
-				'section' => 'analyticstracker_section_settings_custom_dimension',
-				'args' => 	array (
-								'id' => 'analyticstracker_cu_post_format',
-								'type' => 'text',
-								'class' => 'small-text',
-								'name' => 'analyticstracker_cu_post_format',
-								'value' => '',
-								'default' => '5',
-								'label_for' => 'analyticstracker_cu_post_format',
-								'description' => __( 'The index suffix for Post Format', 'analytics-tracker' ),
+				'id'            => 'analyticstracker_cu_post_format',
+				'title'         => __( 'Post Format', 'analytics-tracker' ),
+				'callback'      => 'analyticstracker_settings_field_render',
+				'page'          => 'analyticstracker_page',
+				'section'       => 'analyticstracker_section_settings_custom_dimension',
+				'args'          => 	array (
+									'id'          => 'analyticstracker_cu_post_format',
+									'type'        => 'text',
+									'class'       => 'small-text',
+									'name'        => 'analyticstracker_cu_post_format',
+									'value'       => '',
+									'default'     => '5',
+									'label_for'   => 'analyticstracker_cu_post_format',
+									'description' => __( 'The index suffix for Post Format', 'analytics-tracker' ),
 				)
 			),
 			array (
 				'settings_type' => 'field',
-				'id' => 'analyticstracker_cu_post_type',
-				'title' => __( 'Post Type', 'analytics-tracker' ),
-					'callback' => 'analyticstracker_settings_field_render',
-				'page' => 'analyticstracker_page',
-				'section' => 'analyticstracker_section_settings_custom_dimension',
-				'args' => 	array (
-								'id' => 'analyticstracker_cu_post_type',
-								'type' => 'text',
-								'class' => 'small-text',
-								'name' => 'analyticstracker_cu_post_type',
-								'value' => '',
-								'default' => '6',
-								'label_for' => 'analyticstracker_cu_post_type',
-								'description' => __( 'The index suffix for Post Type', 'analytics-tracker' ),
+				'id'            => 'analyticstracker_cu_post_type',
+				'title'         => __( 'Post Type', 'analytics-tracker' ),
+				'callback'      => 'analyticstracker_settings_field_render',
+				'page'          => 'analyticstracker_page',
+				'section'       => 'analyticstracker_section_settings_custom_dimension',
+				'args'          => 	array (
+									'id'          => 'analyticstracker_cu_post_type',
+									'type'        => 'text',
+									'class'       => 'small-text',
+									'name'        => 'analyticstracker_cu_post_type',
+									'value'       => '',
+									'default'     => '6',
+									'label_for'   => 'analyticstracker_cu_post_type',
+									'description' => __( 'The index suffix for Post Type', 'analytics-tracker' ),
 				)
 			),
 		);
@@ -481,7 +481,7 @@ class AnalyticsTracker {
 		$saved_options 					= get_option( 'analyticstracker_settings' );
 		$analyticstracker_gtag_general 	= $analyticstracker_gtag_events = array();
 
-		if ( preg_match( "/UA-[0-9]{3,9}-[0-9]{1,4}/", $saved_options['analyticstracker_ga'] ) ) {
+		if ( preg_match( "/UA-[0-9]{3,9}-[0-9]{1,4}/", $saved_options['analyticstracker_ga'] ) || preg_match("/G-[0-9a-zA-Z]{6,12}/", $saved_options['analyticstracker_ga']) ) {
 			global $post;
 
 			/**
@@ -492,11 +492,11 @@ class AnalyticsTracker {
 			if ( is_user_logged_in() ) {
 
 				$current_user = wp_get_current_user();
+
 				if ( isset( $saved_options['analyticstracker_userid'] ) && $saved_options['analyticstracker_userid'] != '' ) {
-					$analyticstracker_gtag_general = array( 'user_id' => $current_user->ID );
+					$analyticstracker_gtag_general['user_id'] = $current_user->ID;
 				}
 			}
-var_dump($analyticstracker_gtag_general);
 
 			/**
 			 * IP anonymization
@@ -504,7 +504,7 @@ var_dump($analyticstracker_gtag_general);
 			 * @since 2.0.0
 			 */
 			if ( isset( $saved_options['analyticstracker_anonymizeip'] ) && $saved_options['analyticstracker_anonymizeip'] != '' ) {
-				$analyticstracker_gtag_general = array( 'anonymize_ip' => true );
+				$analyticstracker_gtag_general['anonymize_ip'] = true;
 			}
 
 			/**
@@ -513,7 +513,7 @@ var_dump($analyticstracker_gtag_general);
 			 * @since 2.0.0
 			 */
 			if ( ! isset( $saved_options['analyticstracker_displayfeatures'] ) ) {
-				$analyticstracker_gtag_general = array( 'allow_display_features' => false );
+				$analyticstracker_gtag_general['allow_display_features'] = false;
 			}
 
 			/**
@@ -522,7 +522,7 @@ var_dump($analyticstracker_gtag_general);
 			 * @since 2.0.0
 			 */
 			if ( isset( $saved_options['analyticstracker_enhancedlinkatt'] ) && $saved_options['analyticstracker_enhancedlinkatt'] != '' ) {
-				$analyticstracker_gtag_general = array( 'link_attribution' => true );
+				$analyticstracker_gtag_general['link_attribution'] = true;
 			}
 
 
@@ -599,7 +599,7 @@ var_dump($analyticstracker_gtag_general);
 
 								$analyticstracker_gtag_general['custom_map']['dimension'.$saved_options['analyticstracker_cu_tags']] = 'analyticstracker_cu_tags';
 
-								$analyticstracker_gtag_events = array(
+								$analyticstracker_gtag_events[] = array(
 									'event',
 									'atracker_gtag',
 									array(
@@ -734,15 +734,11 @@ var_dump($analyticstracker_gtag_general);
 					}
 				}
 			}
-var_dump($analyticstracker_gtag_general);
 
-			$analyticstracker_gtag = array(
+			return $analyticstracker_gtag = array(
 				'general'	=> $analyticstracker_gtag_general,
 				'events'	=> $analyticstracker_gtag_events,
 			);
-var_dump($analyticstracker_gtag);
-
-			return $analyticstracker_gtag;
 		}
 	}
 
@@ -764,7 +760,7 @@ var_dump($analyticstracker_gtag);
 			}
 		};
 
-		if( preg_match("/UA-[0-9]{3,9}-[0-9]{1,4}/", $saved_options['analyticstracker_ga']) ) { ?>
+		if( preg_match("/UA-[0-9]{3,9}-[0-9]{1,4}/", $saved_options['analyticstracker_ga']) || preg_match("/G-[0-9a-zA-Z]{6,12}/", $saved_options['analyticstracker_ga'])  ) { ?>
 <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $saved_options['analyticstracker_ga']; ?>"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -802,7 +798,7 @@ var_dump($analyticstracker_gtag);
 		if ( 'google-analytics_page_analyticstracker-other-plugins' == $hook ) {
 			wp_enqueue_script( 'analyticstracker-js-admin', plugins_url( '/javascripts/analyticstracker-admin.js' , __FILE__ ), array( 'jquery' ) );
 
-			wp_register_style( 'analyticstracker-css-admin', plugins_url( '/analytics-tracker/css/analyticstracker-admin.css', false, '2.0.0' ) );
+			wp_register_style( 'analyticstracker-css-admin', plugins_url( '/analytics-tracker/css/analyticstracker-admin.css', false, '2.0.1' ) );
 			wp_enqueue_style( 'analyticstracker-css-admin' );
 		}
 	}
@@ -850,7 +846,7 @@ var_dump($analyticstracker_gtag);
 	public function analyticstracker_settings_init() {
 		register_setting( 'analyticstracker_page', 'analyticstracker_settings' );
 		foreach ( $this->analyticstracker_settings() AS $setting ) {
-			if ($setting['settings_type'] === 'section') {
+			if ( $setting['settings_type'] === 'section' ) {
 				add_settings_section(
 					$setting['id'],
 					$setting['title'],
@@ -858,7 +854,7 @@ var_dump($analyticstracker_gtag);
 					$setting['page']
 				);
 			}
-			if ($setting['settings_type'] === 'field') {
+			if ( $setting['settings_type'] === 'field' ) {
 				add_settings_field(
 					$setting['id'],
 					$setting['title'],
@@ -883,12 +879,12 @@ var_dump($analyticstracker_gtag);
 		$saved_options = get_option( 'analyticstracker_settings' );
 
 		$atts = array(
-			'id' => $options['id'],
-			'type' => ( isset( $options['type'] ) ? $options['type'] : 'text' ),
-			'class' => $options['class'],
-			'name' => 'analyticstracker_settings[' . $options['name'] . ']',
-			'value' => ( array_key_exists( 'default', $options ) ? $options['default'] : null ),
-			'label_for' => ( array_key_exists( 'label_for', $options ) ? $options['label_for'] : false ),
+			'id'          => $options['id'],
+			'type'        => ( isset( $options['type'] ) ? $options['type'] : 'text' ),
+			'class'       => $options['class'],
+			'name'        => 'analyticstracker_settings[' . $options['name'] . ']',
+			'value'       => ( array_key_exists( 'default', $options ) ? $options['default'] : null ),
+			'label_for'   => ( array_key_exists( 'label_for', $options ) ? $options['label_for'] : false ),
 			'description' => ( array_key_exists( 'description', $options ) ? $options['description'] : false )
 		);
 
@@ -911,7 +907,7 @@ var_dump($analyticstracker_gtag);
 		/**
 		 * Input type Checkbox
 		 */
-		if ($atts['type'] == 'checkbox') {
+		if ( $atts['type'] == 'checkbox' ) {
 			$html = sprintf( '<input type="%1$s" class="%2$s" id="%3$s" name="%4$s" value="%5$s" %6$s />', $atts['type'], $atts['class'], $atts['id'], $atts['name'], $atts['value'], ( isset( $atts['checked'] ) ? "checked=".$atts['checked'] : '') );
 			if ( array_key_exists( 'description', $atts ) ){
 				$html .= sprintf( '<p class="description">%1$s</p>', $atts['description'] );
@@ -923,7 +919,7 @@ var_dump($analyticstracker_gtag);
 		/**
 		 * Input type Text
 		 */
-		if ($atts['type'] == 'text') {
+		if ( $atts['type'] == 'text' ) {
 			$html = sprintf( '<input type="%1$s" class="%2$s" id="%3$s" name="%4$s" value="%5$s"/>', $atts['type'], $atts['class'], $atts['id'], $atts['name'], $atts['value'] );
 			if ( array_key_exists( 'description', $atts ) ){
 				$html .= sprintf( '<p class="description">%1$s</p>', $atts['description'] );
@@ -935,7 +931,7 @@ var_dump($analyticstracker_gtag);
 		/**
 		 * Input type Textarea
 		 */
-		 if ($atts['type'] == 'textarea') {
+		 if ( $atts['type'] == 'textarea' ) {
  			$html = sprintf( '<textarea cols="60" rows="5" class="%1$s" id="%2$s" name="%3$s">%4$s</textarea>', $atts['class'], $atts['id'], $atts['name'], $atts['value'] );
  			if ( array_key_exists( 'description', $atts ) ){
  				$html .= sprintf( '<p class="description">%1$s</p>', $atts['description'] );
