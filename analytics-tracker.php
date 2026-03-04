@@ -124,7 +124,7 @@ class AnalyticsTracker {
 				<ul>
 					<li>
 
-						<a href="https://kinsta.com/plans/?kaid=NDINHGAQXILS" target="_blank"><?php esc_html_e( 'Kinsta Managed WordPress Hosting', 'analytics-tracker' ); ?></a> - <?php esc_html_e( 'We have over 10 years of experience working with WordPress and we\'ve poured all that know-how into creating the best managed WordPress hosting solution available today.', 'analytics-tracker' ); ?>
+						<a href="https://kinsta.com/plans/?kaid=NDINHGAQXILS" target="_blank"><?php esc_html_e( 'Kinsta Managed WordPress Hosting', 'analytics-tracker' ); ?></a> - <?php esc_html_e( 'We have many years of experience working with WordPress and we\'ve poured all that know-how into creating the best managed WordPress hosting solution available today.', 'analytics-tracker' ); ?>
 						<p>
 							<a href="https://kinsta.com/plans/?kaid=NDINHGAQXILS" target="_blank">
 								<img class="pressthis_img" src="https://i2.wp.com/valeriu.files.wordpress.com/2018/02/kinsta-dark.png" alt="<?php esc_attr_e( 'Kinsta Managed WordPress Hosting', 'analytics-tracker' ); ?>">
@@ -141,9 +141,6 @@ class AnalyticsTracker {
 					</li>
 					<li>
 						<a href="<?php echo esc_url( network_admin_url( 'plugin-install.php?tab=plugin-information&plugin=auto-update&TB_iframe=true&width=762&height=600' ) ); ?>" class="thickbox"><?php esc_html_e( 'Auto Update', 'analytics-tracker' ); ?></a> - <?php esc_html_e( 'This plugin enable Auto Update for WordPress core, Themes and Plugins.', 'analytics-tracker' ); ?>
-					</li>
-					<li>
-						<a href="https://wplook.com/product/plugins/comingsoon-maintenance-mode-wordpress-plugin/?ref=104&campaign=AnalyticsTracker" target="_blank"><?php esc_html_e( 'ComingSoon', 'analytics-tracker' ); ?></a> - <?php esc_html_e( 'ComingSoon is a Premium Maintenance Mode Plugin designed specifically for Editors, Designers or Developers who want to let visitors know the blog is down for Maintenance or Under Construction.', 'analytics-tracker' ); ?>
 					</li>
 				</ul>
 			</div>
@@ -531,24 +528,6 @@ class AnalyticsTracker {
 	public function analyticstracker_description_section_callback() {  }
 
 	/**
-	 * Section description callback for custom dimensions.
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public function analyticstracker_description_section_cd_callback() {
-		echo wp_kses(
-			__( 'Each custom dimension has an associated index. There is a maximum of 20 custom dimensions (200 for Premium accounts). The index suffix must be a positive integer greater than 0. How to <a href="https://support.google.com/analytics/answer/2709829?hl=en#set_up_custom_dimensions" target="_blank">set up</a> custom dimensions', 'analytics-tracker' ),
-			array(
-				'a' => array(
-					'href'   => array(),
-					'target' => array(),
-				),
-			)
-		);
-	}
-
-	/**
 	 * Initializes plugin settings.
 	 *
 	 * @since 1.0.0
@@ -599,7 +578,7 @@ class AnalyticsTracker {
 			sanitize_text_field( trim( (string) ( $input['analyticstracker_ga'] ?? '' ) ) )
 		);
 
-		$sanitized['analyticstracker_userid'] = ! empty( $input['analyticstracker_userid'] ) ? '1' : '';
+		$sanitized['analyticstracker_userid']        = ! empty( $input['analyticstracker_userid'] ) ? '1' : '';
 		$sanitized['analyticstracker_comment_event'] = ! empty( $input['analyticstracker_comment_event'] ) ? '1' : '';
 
 		return $sanitized;
