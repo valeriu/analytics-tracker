@@ -6,11 +6,11 @@ Contributors: valeriutihai
 Author: Valeriu Tihai
 Author URI: http://valeriu.tihai.ca
 Text Domain: analytics-tracker
-Tags: Google Analytics, Analytics Tracker, Tracking Code, UA Code, Global Site Tag, gtag.js, Visits statistics, Web Stats, WordPress Google Analytics
+Tags: google analytics, ga4, measurement id, analytics, google tag
 Donate link: https://paypal.me/valeriu/25
 Requires at least: 4.6
-Tested up to: 4.9.6
-Stable tag: 2.0.1
+Tested up to: 6.9.1
+Stable tag: 3.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,21 +22,18 @@ Analytics Tracker makes it super easy to add Google Analytics tracking code on y
 
 Analytics Tracker utilizes the latest and greatest features of Google global site tag (gtag.js) and makes it super easy to add tracking code on your blog.
 
-[youtube https://www.youtube.com/watch?v=emtS4LMBFI0]
+Note: Google ended Universal Analytics (UA-) processing on July 1, 2023. We keep UA tracking IDs for legacy compatibility, but for active reporting we strongly recommend using Google Analytics 4 with a G-XXXXXXXX Measurement ID.
 
 This is one of the simplest to use WordPress plugins to insert Google Analytics code on your websites built in WordPress.
 
 Google Analytics is now the most widely used web analytics service on the Internet.
 
 = Features: =
-* <strong>Support AMP</strong> - Insert code to Accelerated Mobile Pages, require [AMP](https://wordpress.org/plugins/amp/) plugin created by Automattic.
-* <strong>Force SSL</strong> - Setting forceSSL to true will force http pages to also send all beacons using https.
-* <strong>User ID</strong> - This is intended to be a known identifier for a user provided by the site owner/tracking library user.
-* <strong>Anonymize IP</strong> - The IP address of the sender will be anonymized
-* <strong>Display Features</strong> - The plugin works by sending an additional request to stats.g.doubleclick.net that is used to provide advertising features like remarketing and demographics and interest reporting in Google Analytics.
-* <strong>Enhanced Link Attribution</strong> - Enhanced Link Attribution improves the accuracy of your In-Page Analytics report by automatically differentiating between multiple links to the same URL on a single page by using link element IDs.
-* <strong>Custom Dimensions</strong> - You can use custom dimensions to track: Tags, Category, Archive, Author, Post Format, Post Type
-* <strong>Event</strong> -  for Download, Email, Phone number, Outbound links, Error 404, Search, Add a comment, Scroll Depth
+* <strong>GA4 Measurement ID setup</strong> - Configure your Google tag with a valid GA4 Measurement ID (for example: G-XXXXXXXXXX).
+* <strong>User ID (optional)</strong> - Send an anonymous hashed user identifier for logged-in users.
+* <strong>Enriched page_view event</strong> - Adds contextual parameters for home, singular, taxonomy, author, search, and 404 pages.
+* <strong>Comment Event (optional)</strong> - Enable or disable the event sent when a comment becomes visible on your site.
+* <strong>Minimal compatibility mode for non-GA4 IDs</strong> - Loads basic gtag config without custom events.
 
 
 > <strong>Analytics Tracker on GitHub</strong><br>
@@ -49,10 +46,10 @@ In most cases you can install automatically from WordPress.org.
 However, if you install this manually, follow these steps:
 1. Upload the Analytics Tracker plugin to your site;
 2. Activate the plugin through the \'Plugins\' menu in WordPress;
-3. Then enter your Google Analytics tracking ID (UA-XXXXXXX-YY);
+3. Then enter your GA4 Measurement ID (G-XXXXXXXXXX);
 You’re done!
 
-If you don't have an Google Analytics ID, you need to go to [Google Analytics](http://www.google.com/analytics), create an account and [get the code](https://support.google.com/analytics/answer/1032385?rd=1), similar to UA-XXXXXXX-YY
+If you don't have a GA4 Measurement ID yet, create a property in [Google Analytics](http://www.google.com/analytics) and get your Measurement ID (for example: G-XXXXXXXXXX).
 
 == Frequently Asked Questions ==
 = How can I suggest a new feature, contribute or report a bug? =
@@ -87,6 +84,13 @@ You can translate Analytics Tracker on [translate.wordpress.org](https://transla
 1. Google Analytics Settings
 
 == Changelog ==
+= 3.0.0 =
+* Updated settings and documentation for GA4 Measurement ID.
+* Added settings sanitization callback for plugin options.
+* Added an optional setting to enable or disable the event sent when a comment becomes visible on your site.
+* Improved uninstall routine for multisite installations.
+* Refined admin asset versioning and loading.
+
 = 2.0.1 =
 * Added compatibility with PHP 7.2
 
