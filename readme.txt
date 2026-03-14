@@ -9,8 +9,8 @@ Text Domain: analytics-tracker
 Tags: google analytics, ga4, measurement id, analytics, google tag
 Donate link: https://paypal.me/valeriu/25
 Requires at least: 4.6
-Tested up to: 6.9.1
-Stable tag: 3.0.0
+Tested up to: 6.9
+Stable tag: 3.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,7 +69,7 @@ When you add either of these tracking snippets to your website, you send a pagev
 * The time a user spends on each page and in what order those pages were visited.
 * What internal links were clicked (based on the URL of the next pageview).
 
-In addition, the IP address, user agent string, and initial page inspection analytics.js does when creating a new tracker is used to determine things like the following:
+In addition, the IP address, user agent string, and initial page inspection performed by the tracking library can be used to determine things like the following:
 
 * The geographic location of the user.
 * What browser and operating system are being used.
@@ -84,6 +84,10 @@ You can translate Analytics Tracker on [translate.wordpress.org](https://transla
 1. Google Analytics Settings
 
 == Changelog ==
+= 3.0.1 =
+* Removed unused legacy Scroll Depth vendor files from the plugin package.
+* Updated README wording to use tracking-library terminology instead of referencing analytics.js directly.
+
 = 3.0.0 =
 * Updated settings and documentation for GA4 Measurement ID.
 * Added settings sanitization callback for plugin options.
