@@ -10,7 +10,7 @@ Tags: google analytics, ga4, measurement id, analytics, google tag
 Donate link: https://paypal.me/valeriu/25
 Requires at least: 4.6
 Tested up to: 6.9
-Stable tag: 3.0.1
+Stable tag: 3.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -84,6 +84,10 @@ You can translate Analytics Tracker on [translate.wordpress.org](https://transla
 1. Google Analytics Settings
 
 == Changelog ==
+= 3.0.2 =
+* Added a WordPress Playground blueprint with a preconfigured GA4 Measurement ID for demo use.
+* Added a Playground admin notice to clarify that tracking runs in the background and should be verified with browser developer tools.
+
 = 3.0.1 =
 * Removed unused legacy Scroll Depth vendor files from the plugin package.
 * Updated README wording to use tracking-library terminology instead of referencing analytics.js directly.

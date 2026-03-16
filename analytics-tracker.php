@@ -5,7 +5,7 @@
  * Description: Analytics Tracker makes it super easy to add Google Analytics tracking code on your site
  * Text Domain: analytics-tracker
  * Domain Path: /languages
- * Version: 3.0.1
+ * Version: 3.0.2
  * Author: Valeriu Tihai
  * Author URI: https://valeriu.tihai.ca
  * Contributors: valeriutihai
@@ -34,7 +34,7 @@ class AnalyticsTracker {
 	 *
 	 * @since 3.0.0
 	 */
-	const VERSION = '3.0.1';
+	const VERSION = '3.0.2';
 
 
 	/**
