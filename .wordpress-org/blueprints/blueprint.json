@@ -19,6 +19,10 @@
 			"code": "<?php require_once '/wordpress/wp-load.php'; update_option( 'analyticstracker_settings', array( 'analyticstracker_ga' => 'G-Q2E43ER6W1', 'analyticstracker_userid' => '1', 'analyticstracker_comment_event' => '' ) ); ?>"
 		},
 		{
+			"step": "mkdir",
+			"path": "/wordpress/wp-content/mu-plugins"
+		},
+		{
 			"step": "writeFile",
 			"path": "/wordpress/wp-content/mu-plugins/analytics-tracker-demo-guide.php",
 			"data": "<?php\nadd_action( 'admin_notices', function() {\n\tif ( ! is_admin() ) {\n\t\treturn;\n\t}\n\n\t$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';\n\tif ( 'analyticstracker-menu' !== $page ) {\n\t\treturn;\n\t}\n\n\techo '<div class=\"notice notice-info\"><p><strong>Analytics Tracker Demo Guide</strong></p><p>Analytics Tracker runs in the background and does not render visible frontend output. Use browser developer tools on the Playground iframe to verify that gtag.js and the tracking calls are present on frontend pages.</p></div>';\n} );\n"
